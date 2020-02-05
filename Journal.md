@@ -22,8 +22,8 @@ Position_depart	    | #define distance_max (7000)
 				    | #define d_50 (10%)
 
 Class arene:
-Liste robot (max_robot)	|#define x (10 000)
-Liste missile			|#define y (10 000)
+Liste robot (max_robot)	| #define x (10 000)
+Liste missile			| #define y (10 000)
 					    | #define robot (4)
 
 
