@@ -29,4 +29,10 @@ Liste missile			| #define y (10 000)
 
 ### Travail à faire:
 
-Implementer les class ci-dessus et reflechir à l'implementation du cycle.
+Reflechir à l'implementation du cycle et implementer les fichiers .c
+
+
+## Date : 12/02/2020
+### Travail effectué:
+
+### Travail à faire:
