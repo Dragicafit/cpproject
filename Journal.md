@@ -1,6 +1,45 @@
 ------------------
 # Journal de bord
 ------------------
+# A faire :
+	- Les fonction de base de :	- arene.c
+								- missile.c
+								- robot.c
+	- Le parser
+	- L'Interface Visuelle
+	
+	Arene.c :
+		- Robot coin d'arene
+		- Collision() (Robot -> Robot); (Robot -> Mur); (Robot -> Missile)
+		-
+	Robot.c :
+		- Init()
+		- NextInstruction()
+		- Degat()
+		- posToInt()
+		- MiseAJour()
+		- Destruction()
+
+	Robot.h : (Ajouter un etat de moteur ?)
+		struct engine: Vitesse et direction
+		struct shoot: Direction et distance
+		union action : Engine et shoot
+
+
+	missile.c : 
+		- Explose()
+		- MiseAJour()
+
+	Cycle :
+		- Robot.NextInstruction()
+		- robot.MiseAJour()
+		- missile.MiseAjour()
+		- missile.Explose()
+		- robot.Degat()
+
+	A voir : 
+		- 
+____________________
 ## Date : 05/02/2020
 ### Travail effectué:
 Aujourd'hui, nous avons commencé par discuter d'une possible implementation du projet, et de ce que nous allions devoir faire.
