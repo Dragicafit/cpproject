@@ -12,4 +12,29 @@ typedef struct
     int nb_missiles;
     char mort; /*Boolean*/
     char* script;
-}robot;
+} robot;
+
+typedef struct
+{
+    float vitesse;
+    float direction;
+} engine;
+
+typedef struct
+{
+    float direction;
+    int distance;
+} shoot;
+
+union
+{
+    engine engine;
+    shoot shoot;
+} action;
+
+void nextInstruction(); // int si erreur
+void miseAJour();
+void degats();
+int[] posToInt();
+void init();
+void destruction();

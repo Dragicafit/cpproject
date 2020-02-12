@@ -1,3 +1,5 @@
+#include <robot.h>
+
 #define SPEED 500
 #define DISTANCE_MAX 7000
 #define D_400 0.03
@@ -6,6 +8,10 @@
 
 typedef struct
 {
+    robot parent;
     float position;
     float position_depart;
 } missile;
+
+void misAJour();
+int explose();
