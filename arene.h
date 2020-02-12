@@ -11,9 +11,10 @@ typedef struct
     missile l_missile[ROBOT_MAX * MISSILES_MAX];
 } arene;
 
-void collision(robot r1, robot r2);
-void collision(robot r);
-void collision(robot r, missile m);
+void collisionRtoR(robot r1, robot r2);
+void collisionRtoW(robot r);
+void collisionRtoM(robot r, missile m);
 //void collision(missile m1, missile m2);
+void cycle();
 
 
