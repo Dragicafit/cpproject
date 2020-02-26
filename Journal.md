@@ -46,7 +46,7 @@ Aujourd'hui, nous avons commencé par discuter d'une possible implementation du 
 Nous avons défini comment implementer les différents objets.
 
 Class robot:			
-Position			        | #define missile_max( 2)
+Position			        | #define missile_max(2)
 Vitesse (pourcentage)		| #define size (10x10)
 Dégâts (pourcentage)		| #define vitesse_max (10)
 Nb missiles en cour 		| #define collision (2%)

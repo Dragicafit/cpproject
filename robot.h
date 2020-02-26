@@ -1,3 +1,5 @@
+#include <main.h>
+
 #define SIZE_X 10
 #define SIZE_Y 10
 #define VITESSE_MAX 10
@@ -6,7 +8,7 @@
 
 typedef struct
 {
-    float position;
+    pos position;
     float vitesse;
     float degat;
     int nb_missiles;
@@ -32,9 +34,8 @@ union
     shoot shoot;
 } action;
 
-void nextInstruction(); // int si erreur
-void miseAJour();
-void degats();
-int[] posToInt();
-void init();
-void destruction();
+void nextInstruction(robot* r); // int si erreur
+void miseAJour(robot* r);
+void degats(robot* r, float d);
+void init(robot* r, pos position);
+void destruction(robot* r);
