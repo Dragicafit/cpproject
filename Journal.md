@@ -73,5 +73,6 @@ Reflechir à l'implementation du cycle et implementer les fichiers .c
 
 ## Date : 12/02/2020
 ### Travail effectué:
-
+Mise en place des differentes etapes à faire.
+On commencé à regarder le fonctionnement de l'affichage dans le terminal et debuté les fonctions. (Collision)
 ### Travail à faire:

@@ -33,8 +33,8 @@ union
 } action;
 
 void nextInstruction(); // int si erreur
-void miseAJour();
+void miseAJour(robot* r);
 void degats();
-int[] posToInt();
+int* posToInt();
 void init();
 void destruction();
