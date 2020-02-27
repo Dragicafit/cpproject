@@ -17,5 +17,3 @@ void collisionRtoE(robot* r, missile* m);
 void collisionRtoM(arene* a, robot* r, missile* m);
 void cycle(arene* a);
 void exploseRobots(arene* a, missile* m);
-
-

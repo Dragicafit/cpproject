@@ -1,4 +1,4 @@
-#include <main.h>
+#include "main.h"
 
 #define SIZE_X 10
 #define SIZE_Y 10

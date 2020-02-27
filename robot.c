@@ -1,4 +1,4 @@
-#include <robot.h>
+#include "robot.h"
 #include <stdio.h>
 
 void init(robot* r, pos position) {
@@ -16,5 +16,5 @@ void destruction(robot* r) {
 }
 
 void degats(robot* r, float d) {
-	r.degat += d;
+	r->degat += d;
 }
