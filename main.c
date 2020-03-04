@@ -1,4 +1,5 @@
-﻿#include "main.h"
+﻿#include "constantes.h"
+#include "main.h"
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
