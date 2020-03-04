@@ -1,8 +1,9 @@
-﻿#include <stdio.h>
-#include <stdlib.h>
+﻿#ifndef DEF_MAIN
+#define DEF_MAIN
 
-typedef struct
-{
+typedef struct {
     float x;
     float y;
 } pos;
+
+#endif
