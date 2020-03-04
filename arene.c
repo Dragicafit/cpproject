@@ -1,13 +1,19 @@
+#include "constantes.h"
 #include "arene.h"
 #include <stdio.h>
 #include "missile.h"
 #include "robot.h"
+#include "main.h"
 
 void cycle(arene *a) {
-    for (int i = 0; i < sizeof(a->l_missile) / sizeof(missile); i++)
-        miseAJour(a->l_missile[i]);
-    for (int i = 0; i < sizeof(a->l_robot) / sizeof(robot); i++)
-        miseAJour(a->l_robot[i]);
+    for (int i = 0; i < sizeof(a->l_missile) / sizeof(missile); i++) {
+        pos position = {1, 1};
+        miseAJourMissile(a->l_missile[i], position);
+    }
+    for (int i = 0; i < sizeof(a->l_robot) / sizeof(robot); i++) {
+        pos position = {1, 1};
+        miseAJourRobot(a->l_robot[i], position, 1);
+    }
 }
 
 void collisionRtoR(robot *r1, robot *r2) {
@@ -39,6 +45,10 @@ void collisionRtoM(arene *a, robot *r, missile *m) {
     if (abs(r->position.x - m->position.x) < SIZE_X &&
         abs(r->position.y - m->position.y) < SIZE_Y)
         exploseRobots(a, m);
+}
+
+void collisionMtoW(arene *a, missile *m) {
+    exploseRobots(a, m);
 }
 
 void exploseRobots(arene *a, missile *m) {

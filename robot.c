@@ -13,7 +13,17 @@ void init(robot *r, pos position) {
 }
 
 void destruction(robot *r) {
-    if (r->degat >= 1) r->mort = 1;
+    if (r->degat >= 1) 
+        r->mort = 1;
 }
 
-void degats(robot *r, float d) { r->degat += d; }
+void degats(robot *r, float d) { 
+    if (r->mort != 1)
+        r->degat += d;
+}
+
+
+void miseAJourRobot(robot *r, pos position, float vitesse){
+    r->position = position;
+    r->vitesse = vitesse;
+}
