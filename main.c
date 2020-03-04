@@ -5,8 +5,7 @@
 
 #define DELAY 33
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]){
     WINDOW *boite;
     initscr();//Initialise la structure WINDOW et autres paramètres
     boite = subwin(stdscr, LINES, COLS,0,0);//On créer une fenetre de LINES lignes et de COL collonnes a partir de la pos (0,0)
