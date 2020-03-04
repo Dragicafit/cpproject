@@ -2,8 +2,7 @@
 #include "main.h"
 #include "robot.h"
 #include "plateau.h"
-
-#define DELAY 33
+#include "constantes.h"
 
 void plateau(robot *r1, robot *r2, robot *r3, robot *r4){
     WINDOW *boite;
