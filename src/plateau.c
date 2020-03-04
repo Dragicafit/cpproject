@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <stdlib.h>
 
 void plateau(){
     WINDOW *boite;

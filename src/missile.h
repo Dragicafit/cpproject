@@ -1,6 +1,9 @@
 #ifndef DEF_MISSILE
 #define DEF_MISSILE
 
+#include "position.h"
+#include "robot.h"
+
 typedef struct {
     robot *parent;
     pos position;
@@ -8,7 +11,7 @@ typedef struct {
 } missile;
 
 void initMissile(missile *m, robot *parent);
-void misaAJourMissile(missile *m, pos position);
+void miseAJourMissile(missile *m, pos position);
 int explose(missile *m);
 
 #endif
