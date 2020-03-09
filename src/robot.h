@@ -1,6 +1,7 @@
 #ifndef DEF_ROBOT
 #define DEF_ROBOT
 
+#include "position.h"
 
 typedef struct {
     pos position;

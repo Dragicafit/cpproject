@@ -1,5 +1,6 @@
 #include "missile.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 #include "robot.h"
 
@@ -9,11 +10,11 @@ void initMissile(missile *m, robot *parent) {
 }
 
 int explose(missile *m) {
-    m->parent->nb_missiles--;
+    m->parent->nb_missiles-=1;
     free(m);
 }
 
-void misaAJourMissile(missile *m, pos position) {
+void miseAJourMissile(missile *m, pos position) {
     m->position.x = position.x;
     m->position.y = position.y;
 }

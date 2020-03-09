@@ -1,6 +1,8 @@
 #include "constantes.h"
 #include "arene.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include "missile.h"
 #include "robot.h"
 #include "main.h"

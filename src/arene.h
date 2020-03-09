@@ -1,6 +1,9 @@
 #ifndef DEF_ARENE
 #define DEF_ARENE
 
+#include "robot.h"
+#include "missile.h"
+
 typedef struct
 {
     robot *l_robot[ROBOT_MAX];
