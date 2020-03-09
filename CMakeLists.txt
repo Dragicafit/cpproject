@@ -1,7 +1,11 @@
 ﻿# CMakeList.txt : projet CMake pour CMakeProject2, incluez la source et définissez
 cmake_minimum_required (VERSION 3.8)
 
-project ("CPproject")
+project (CPproject)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_COMPILER_IS_GNUCC TRUE)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 find_package(Curses REQUIRED)
 
