@@ -1,4 +1,6 @@
 #include "constantes.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <ncurses.h>
 #include "main.h"
 #include "robot.h"
@@ -8,8 +10,9 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4){
     WINDOW *boite;
     initscr();//Initialise la structure WINDOW et autres paramètres
     boite = subwin(stdscr, LINES, COLS,0,0);//On créer une fenetre de LINES lignes et de COL collonnes a partir de la pos (0,0)
-
-    placer_robot(r1,r2,r3,r4,boite);
+	while(1){
+    	placer_robot(r1,r2,r3,r4,boite);
+	}
 /* Faire bouger un element
 	//Robot
 	for (size_t i = 1; i < 100; i++)
@@ -21,8 +24,8 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4){
 		napms(DELAY);
 	}
 */
-    getch();// On attend que l'utilisateur appui sur une touche pour quitter
-    endwin();// Restaure les paramètres par défaut du terminal
+    //getch();// On attend que l'utilisateur appui sur une touche pour quitter
+    //endwin();// Restaure les paramètres par défaut du terminal
     free(boite);
 }
 
@@ -30,12 +33,33 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4){
 void placer_robot(robot *r1,robot *r2,robot *r3,robot *r4, WINDOW *boite){
 	wclear(boite);
 	box(boite, ACS_VLINE, ACS_HLINE); // ACS_VLINE et ACS_HLINE sont des constantes qui génèrent des bordures par défaut
-	int echx = LINES / 10000;
-	int echy = COLS / 10000;
-	mvwaddch(boite,r1->position.x*echx, r1->position.y*echy ,"R1");
-	mvwaddch(boite,r2->position.x*echx , r2->position.y*echy ,"R2");
-	mvwaddch(boite,r3->position.x*echx , r3->position.y*echy ,"R3");
-	mvwaddch(boite,r4->position.x*echx , r4->position.y*echy ,"R4");
+	float echy = (((float)LINES) / 10000);
+	float echx = (((float)COLS) / 10000);
+	robot_mur(r1, echx,echy, "A", boite);
+	robot_mur(r2, echx,echy, "B", boite);
+	robot_mur(r3, echx,echy, "C", boite);
+	robot_mur(r4, echx,echy, "D", boite);
 	wrefresh(boite);
 	napms(DELAY);
+}
+
+void robot_mur(robot *r, float echx, float echy, char *c, WINDOW *boite){
+	float x = r->position.x * echx;
+	float y = r -> position.y * echy;
+	if(x < 1){
+		x = 1;
+	}
+	if(y < 1){
+		y = 1;
+	}
+	if(x > (COLS -2)){
+		x = COLS -2;
+	}
+	if(y > (LINES -2)){
+		y = LINES -2;
+	}
+	init_pair(1,COLOR_BLUE,COLOR_BLACK);
+	attron(1);
+	mvwprintw(boite,y,x,c);
+	attroff(1);
 }
