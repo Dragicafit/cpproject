@@ -76,3 +76,11 @@ Reflechir à l'implementation du cycle et implementer les fichiers .c
 Mise en place des differentes etapes à faire. (Section 'A faire')
 On commencé à regarder le fonctionnement de l'affichage dans le terminal et debuté les fonctions. (Collision)
 ### Travail à faire:
+
+## Date : 11/03/2020
+### Travail effectué:
+Nous avons revu la structure du projet afin d'en faciliter la lecture.
+Nous avons réglé des problèmes liés a CMake. Certaines fonction ont été modifier ou ajouter car nous nous somme rendu compte qu'il manquait des choses.
+L'affichage avance petit à petit. La compréhention de Ncurses commence a rentrer.
+### Travail à faire:
+Avancer l'affichage et faire le parser (voir s'il ne manque pes d'autres fonctions et si rien n'est a corriger).
