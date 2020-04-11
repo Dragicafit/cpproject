@@ -1,4 +1,4 @@
-﻿#ifndef DEF_MAIN
+#ifndef DEF_MAIN
 #define DEF_MAIN
 
 #endif

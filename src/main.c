@@ -1,4 +1,4 @@
-﻿#include "main.h"
+#include "main.h"
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
