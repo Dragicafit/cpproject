@@ -1,29 +1,35 @@
+#include "constantes.h"
 #include "main.h"
+#include "robot.h"
+#include "arene.h"
+#include "plateau.h"
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define DELAY 33
+#define MSIZE_H (3*(COLS/4))
 
 int main(int argc, char* argv[]) {
-    WINDOW* boite;
-    initscr();  // Initialise la structure WINDOW et autres paramètres
-    boite = subwin(stdscr, LINES, COLS, 0,
-                   0);  // On créer une fenetre de LINES lignes et de COL
-                        // collonnes a partir de la pos (0,0)
+    robot *r1 = malloc(sizeof(robot));
+    pos p1 = {1.0,1.0};
+    init(r1,p1);
 
-    // Robot
-    for (size_t i = 1; i < 100; i++) {
-        wclear(boite);
-        box(boite, ACS_VLINE,
-            ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes qui
-                         // génèrent des bordures par défaut
-        mvwaddch(boite, 1, i, '>');
-        wrefresh(boite);
-        napms(DELAY);
-    }
+    robot *r2 = malloc(sizeof(robot));
+    pos p2 = {10000.0,1.0};
+    init(r2,p2);
 
-    getch();   // On attend que l'utilisateur appui sur une touche pour quitter
-    endwin();  // Restaure les paramètres par défaut du terminal
-    free(boite);
+    robot *r3 = malloc(sizeof(robot));
+    pos p3 = {1.0,10000.0};
+    init(r3,p3);
+
+    robot *r4 = malloc(sizeof(robot));
+    pos p4 = {10000.0,10000.0};
+    init(r4,p4);
+
+    arene *plat = malloc(sizeof(arene));
+
+    plateau(r1,r2,r3,r4,plat);
+
 }
