@@ -14,11 +14,10 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4, arene *plateau){
     add_stats(r1,r2,r3,r4,stats);
     placer_robot(r1,r2,r3,r4,vue);
     position_missile(plateau,vue);
-
+    free(vue);
     getch();
     endwin();
     free(vue);
-    return 0;
 }
 
 void add_stats(robot *r1, robot *r2, robot *r3, robot *r4, WINDOW *stats){
