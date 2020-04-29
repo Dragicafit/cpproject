@@ -28,4 +28,6 @@ void miseAJourRobot(robot *r, int angle, float vitesse) {
   r->angle = angle;
   r->position.x += (r->vitesse / 100) * VITESSE_MAX * (int)cos(r->angle);
   r->position.y += (r->vitesse / 100) * VITESSE_MAX * (int)sin(r->angle);
+  if (r->position.x > X) r->position.x = X - 10;
+  if (r->position.x > Y) r->position.x = Y - 10;
 }

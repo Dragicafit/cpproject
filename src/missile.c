@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "constantes.h"
 #include "main.h"
 #include "robot.h"
 
@@ -26,5 +27,13 @@ void miseAJourMissile(missile *m) {
                      : 500;
   m->position.x += m->distance * (int)cos(m->angle);
   m->position.y += m->distance * (int)sin(m->angle);
+  if (m->position.x > X) {
+    m->position.x = X - 1;
+    explose(m);
+  }
+  if (m->position.x > Y) {
+    m->position.x = Y - 1;
+    explose(m);
+  }
   if (m->distance >= m->distanceExplosion) explose(m);
 }
