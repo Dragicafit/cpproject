@@ -1,26 +1,25 @@
 #include "missile.h"
-
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 
 #include "constantes.h"
+=======
+>>>>>>> parent of 43dc261... modif robot et missile
 #include "main.h"
 #include "robot.h"
 
-void initMissile(missile *m, robot *parent, int distance, int angle) {
-  m->parent = parent;
-  m->position = parent->position;
-  m->distance = 0;
-  m->distanceExplosion = distance;
-  m->angle = angle;
+void initMissile(missile *m, robot *parent) {
+    m->parent = parent;
+    m->position = parent->position;
 }
 
 int explose(missile *m) {
-  m->parent->nb_missiles -= 1;
-  free(m);
+    m->parent->nb_missiles-=1;
+    free(m);
 }
 
+<<<<<<< HEAD
 void miseAJourMissile(missile *m) {
   m->distance += m->distanceExplosion - m->distance < 500
                      ? m->distanceExplosion - m->distance
@@ -36,4 +35,9 @@ void miseAJourMissile(missile *m) {
     explose(m);
   }
   if (m->distance >= m->distanceExplosion) explose(m);
+=======
+void miseAJourMissile(missile *m, pos position) {
+    m->position.x = position.x;
+    m->position.y = position.y;
+>>>>>>> parent of 43dc261... modif robot et missile
 }

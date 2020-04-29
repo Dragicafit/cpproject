@@ -5,15 +5,13 @@
 #include "robot.h"
 
 typedef struct {
-  robot *parent;
-  pos position;
-  int distance;
-  int distanceExplosion;
-  int angle;
+    robot *parent;
+    pos position;
+    pos position_depart;
 } missile;
 
-void initMissile(missile *m, robot *parent, int distance, int angle);
-void miseAJourMissile(missile *m);
+void initMissile(missile *m, robot *parent);
+void miseAJourMissile(missile *m, pos position);
 int explose(missile *m);
 
 #endif
