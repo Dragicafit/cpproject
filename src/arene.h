@@ -1,14 +1,13 @@
 #ifndef DEF_ARENE
 #define DEF_ARENE
 
-#include "robot.h"
 #include "missile.h"
+#include "robot.h"
 
-typedef struct
-{
-    robot *l_robot[ROBOT_MAX];
-    missile *l_missile[ROBOT_MAX * MISSILES_MAX];
-    int nb_missile;
+typedef struct {
+  robot *l_robot[ROBOT_MAX];
+  missile *l_missile[ROBOT_MAX * MISSILES_MAX];
+  int nb_missile;
 } arene;
 
 void cycle(arene *a);

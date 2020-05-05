@@ -4,27 +4,27 @@
 #include "position.h"
 
 typedef struct {
-    pos position;
-    float vitesse;
-    float degat;
-    int nb_missiles;
-    char mort; /*Boolean*/
-    char *script;
+  pos position;
+  float vitesse;
+  float degat;
+  int nb_missiles;
+  char mort; /*Boolean*/
+  char *script;
 } robot;
 
 typedef struct {
-    float vitesse;
-    float direction;
+  float vitesse;
+  float direction;
 } engine;
 
 typedef struct {
-    float direction;
-    int distance;
+  float direction;
+  int distance;
 } shoot;
 
 union {
-    engine engine;
-    shoot shoot;
+  engine engine;
+  shoot shoot;
 } action;
 
 void nextInstruction(robot *r);  // int si erreur

@@ -2,8 +2,8 @@
 #define DEF_POS
 
 typedef struct {
-    float x;
-    float y;
+  float x;
+  float y;
 } pos;
 
 #endif

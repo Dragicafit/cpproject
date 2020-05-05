@@ -5,9 +5,9 @@
 #include "robot.h"
 
 typedef struct {
-    robot *parent;
-    pos position;
-    pos position_depart;
+  robot *parent;
+  pos position;
+  pos position_depart;
 } missile;
 
 void initMissile(missile *m, robot *parent);
