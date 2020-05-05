@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "constantes.h"
+#include "main.h"
+#include "plateau.h"
+#include "robot.h"
+
 void plateau(robot *r1, robot *r2, robot *r3, robot *r4, arene *plateau) {
   WINDOW *vue, *stats;
   initscr();
