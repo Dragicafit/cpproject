@@ -20,4 +20,7 @@
 #define MISSILES_MAX 2
 #define COLLISION 0.02
 
+#define DELAY 33
+
+
 #endif
