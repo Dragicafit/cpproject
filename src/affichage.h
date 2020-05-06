@@ -3,16 +3,16 @@
 
 #include "parser.h"
 
-const char* commandToString[] = {"WAIT", "POKE",   "GOTO",
-                                 "IF",   "ENGINE", "SHOOT"};
+static const char* commandToString[] = {"WAIT", "POKE",   "GOTO",
+                                        "IF",   "ENGINE", "SHOOT"};
 
-const char* expressionToString[] = {
+static const char* expressionToString[] = {
     "INT",   "PAR",  "PEEK", "RAND",  "CARDINAL", "SELF",    "SPEED",
     "STATE", "GPSX", "GPSY", "ANGLE", "TARGETX",  "TARGETY", "DISTANCE"};
 
-const char* operatorToString[] = {"+", "-", "*", "/", "%"};
+static const char* operatorToString[] = {"+", "-", "*", "/", "%"};
 
-const char* comparisonToString[] = {"<", "<=", "=", "<>", ">=", ">"};
+static const char* comparisonToString[] = {"<", "<=", "=", "<>", ">=", ">"};
 
 void printProgram(program* prog);
 void printCommand(command* com);
