@@ -219,22 +219,25 @@ line* isLine(FILE* f, char* name) {
 program* isProgram(FILE* f, char* name) {
   printf("isProgram : %s ", name);
 
-  program* program1 = calloc(1, sizeof(program));
   char buff[128];
   int i = 0;
 
-  program1->lines[0] = isLine(f, name);
-  if (program1->lines[0] == NULL) return NULL;
+  line* lines[MAX_LINES];
+  lines[0] = isLine(f, name);
+  if (lines[0] == NULL) return NULL;
 
   for (i = 1;; i++) {
     int rewind = -fscanf(f, "%s ", buff);
-    program1->lines[i] = isLine(f, buff);
-    if (program1->lines[i] == NULL) {
+    lines[i] = isLine(f, buff);
+    if (lines[i] == NULL) {
       fseek(f, rewind, SEEK_CUR);
       break;
     }
   }
+  program* program1 = calloc(1, sizeof(program) + i * sizeof(line*));
   program1->length = i * sizeof(line*);
+
+  memcpy(program1->lines, lines, i * MAX_LINES);
 
   printf("1\n");
   return program1;

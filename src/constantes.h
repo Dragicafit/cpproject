@@ -19,5 +19,6 @@
 #define VITESSE_MAX 10
 #define MISSILES_MAX 2
 #define COLLISION 0.02
+#define MAX_LINES 512
 
 #endif

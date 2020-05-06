@@ -10,8 +10,11 @@
 #include "parser.h"
 
 void printProgram(program* prog) {
-  if (prog == NULL) printf("Ceci n'est pas valide");
-  for (int i = 0; i < prog->length; i++) {
+  if (prog == NULL) {
+    printf("Ceci n'est pas valide");
+    return;
+  }
+  for (int i = 0; i < prog->length / sizeof(line*); i++) {
     printLine(prog->lines[i]);
   }
 }
