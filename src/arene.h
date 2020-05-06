@@ -1,6 +1,7 @@
 #ifndef DEF_ARENE
 #define DEF_ARENE
 
+#include "constantes.h"
 #include "missile.h"
 #include "robot.h"
 
