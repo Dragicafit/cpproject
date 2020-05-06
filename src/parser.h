@@ -1,6 +1,7 @@
 #ifndef DEF_PARSER
 #define DEF_PARSER
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,11 +47,11 @@ typedef struct {
   expression* expression1;
   expression* expression2;
   condition* condition;
-  u_int32_t number;
+  uint32_t number;
 } command;
 
 typedef struct {
-  u_int32_t number;
+  uint32_t number;
   command* command;
 } line;
 

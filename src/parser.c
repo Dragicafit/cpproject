@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "affichage.h"
 #include "constantes.h"
 #include "main.h"
 
@@ -323,7 +324,7 @@ void parser(int argc, char const* argv[]) {
     if (f == NULL) handle_error("fopen");
     char buff[128];
     fscanf(f, "%s ", buff);
-    printf("1 : %d\n", isProgram(f, buff));
+    printProgram(isProgram(f, buff));
   }
 }
 
