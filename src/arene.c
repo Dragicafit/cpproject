@@ -9,6 +9,18 @@
 #include "missile.h"
 #include "robot.h"
 
+arene *initArene(char *fichiers[ROBOT_MAX]) {
+  arene *a = calloc(1, sizeof(arene));
+
+  a->nb_missile = 0;
+  a->l_robot[0] = initRobot(1.0, 1.0, fichiers[0], 0);
+  a->l_robot[1] = initRobot(10000.0, 1.0, fichiers[1], 1);
+  a->l_robot[2] = initRobot(1.0, 10000.0, fichiers[2], 2);
+  a->l_robot[3] = initRobot(10000.0, 10000.0, fichiers[3], 3);
+
+  return a;
+}
+
 void cycle(arene *a) {
   for (int i = 0; i < sizeof(a->l_missile) / sizeof(missile); i++) {
     pos position = {1, 1};

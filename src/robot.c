@@ -6,7 +6,7 @@
 #include "constantes.h"
 #include "main.h"
 
-robot *init(float positionX, float positionY, char fichier[], int id) {
+robot *initRobot(float positionX, float positionY, char fichier[], int id) {
   robot *r = calloc(1, sizeof(robot));
   r->degat = 0;
   r->mort = 0;
