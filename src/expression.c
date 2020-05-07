@@ -102,8 +102,12 @@ void engine(uint32_t angle, uint32_t speed) {
 }
 
 void shoot(uint32_t angle, uint32_t distance) {
+  if (a->nb_missile >= ROBOT_MAX * MISSILES_MAX ||
+      r->nb_missiles >= MISSILES_MAX)
+    return;
   missile *m;
   initMissile(m, r, distance, angle);
   a->l_missile[a->nb_missile] = m;
   a->nb_missile += 1;
+  r->nb_missiles += 1;
 }
