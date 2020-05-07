@@ -10,14 +10,6 @@
 #include "plateau.h"
 #include "robot.h"
 
-void delay(int i) /*Pause l'application pour i seconds*/
-{
-  clock_t start, end;
-  start = clock();
-  while (((end = clock()) - start) <= i * CLOCKS_PER_SEC)
-    ;
-}
-
 void plateau(robot *r1, robot *r2, robot *r3, robot *r4, arene *plateau) {
   WINDOW *vue, *stats;
   initscr();
@@ -51,7 +43,7 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4, arene *plateau) {
     position_missile(r1, r2, r3, r4, plateau, vue);
     wattron(vue, COLOR_PAIR(1));
     wattroff(vue, COLOR_PAIR(1));
-    delay(1);
+    sleep(1);
     wclear(vue);
     wclear(stats);
   }
