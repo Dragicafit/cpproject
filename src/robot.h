@@ -8,7 +8,8 @@ typedef struct {
   float vitesse;
   float degat;
   int nb_missiles;
-  char mort; /*Boolean*/
+  int angle;
+  char mort;
   char *script;
 } robot;
 
@@ -28,7 +29,7 @@ union {
 } action;
 
 void nextInstruction(robot *r);  // int si erreur
-void miseAJourRobot(robot *r, pos position, float vitesse);
+void miseAJourRobot(robot *r, int angle, float vitesse);
 void degats(robot *r, float d);
 void init(robot *r, pos position);
 void destruction(robot *r);

@@ -12,11 +12,11 @@
 void cycle(arene *a) {
   for (int i = 0; i < sizeof(a->l_missile) / sizeof(missile); i++) {
     pos position = {1, 1};
-    miseAJourMissile(a->l_missile[i], position);
+    miseAJourMissile(a->l_missile[i]);
   }
   for (int i = 0; i < sizeof(a->l_robot) / sizeof(robot); i++) {
     pos position = {1, 1};
-    miseAJourRobot(a->l_robot[i], position, 1);
+    miseAJourRobot(a->l_robot[i], 0, 0.1);
   }
 }
 

@@ -5,7 +5,7 @@
 #define Y 10000
 #define ROBOT_MAX 4
 
-#define SPEED 500
+#define SPEED_ROBOT 500
 #define DISTANCE_MAX 7000
 #define DIST_400 400
 #define DIST_200 200
@@ -19,6 +19,7 @@
 #define VITESSE_MAX 10
 #define MISSILES_MAX 2
 #define COLLISION 0.02
+#define MAX_LINES 512
 
 #define DELAY 33
 
