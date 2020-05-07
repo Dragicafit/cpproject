@@ -98,4 +98,5 @@ void printComparison(comparison comp) {
 void printLine(line* l) {
   printNumber(l->number);
   printCommand(l->command);
+  printf("\n");
 }
