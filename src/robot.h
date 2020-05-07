@@ -17,6 +17,7 @@ typedef struct {
   int id;
   int32_t wait;
   uint32_t adresses[ADRESSES_MAX];
+  uint32_t ligne;
 } robot;
 
 typedef struct {
@@ -30,7 +31,7 @@ typedef struct {
 } shoot;
 
 union {
-  engine engine;
+  engine eng;
   shoot shoot;
 } action;
 
