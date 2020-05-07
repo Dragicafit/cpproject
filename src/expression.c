@@ -62,7 +62,7 @@ int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
   return (int32_t)sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-char condition(int32_t exp1, comparison comp, int32_t exp2) {
+char conditions(int32_t exp1, comparison comp, int32_t exp2) {
   switch (comp) {
     case STRIC_INF:
       return exp1 < exp2;
@@ -81,7 +81,7 @@ char condition(int32_t exp1, comparison comp, int32_t exp2) {
   }
 }
 
-void wait(int32_t delay) {
+void Wait(int32_t delay) {
   if (delay < 0) return;
   r->wait = delay;
 }
