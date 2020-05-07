@@ -96,12 +96,12 @@ void ifThen(char condition, uint32_t number) {
   }
 }
 
-void engine(uint32_t angle, uint32_t speed) {
+void Engine(uint32_t angle, uint32_t speed) {
   r->vitesse = speed;
   r->angle = angle;
 }
 
-void shoot(uint32_t angle, uint32_t distance) {
+void Shoot(uint32_t angle, uint32_t distance) {
   if (a->nb_missile >= ROBOT_MAX * MISSILES_MAX ||
       r->nb_missiles >= MISSILES_MAX)
     return;
