@@ -80,3 +80,16 @@ char condition(int32_t exp1, comparison comp, int32_t exp2) {
       return 0;
   }
 }
+
+void poke(int32_t add, int32_t value) { r->adresses[add] = value; }
+
+void ifThen(char condition, uint32_t number){
+  if(condition){
+    goto(number);
+  }
+}
+
+void engine(uint32_t angle, uint32_t speed){
+  r->vitesse = speed;
+  r->angle = angle;
+}
