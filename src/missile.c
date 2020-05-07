@@ -30,8 +30,8 @@ void miseAJourMissile(missile *m) {
     m->position.x = X - 1;
     explose(m);
   }
-  if (m->position.x > Y) {
-    m->position.x = Y - 1;
+  if (m->position.y > Y) {
+    m->position.y = Y - 1;
     explose(m);
   }
   if (m->distance >= m->distanceExplosion) explose(m);
