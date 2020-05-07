@@ -81,6 +81,11 @@ char condition(int32_t exp1, comparison comp, int32_t exp2) {
   }
 }
 
+void wait(int32_t delay) {
+  if (delay < 0) return;
+  r->wait = delay;
+}
+
 void Goto(uint32_t nb) { r->ligne = nb; }
 
 void poke(int32_t add, int32_t value) { r->adresses[add] = value; }
