@@ -80,3 +80,8 @@ char condition(int32_t exp1, comparison comp, int32_t exp2) {
       return 0;
   }
 }
+
+void wait(int32_t delay) {
+  if (delay < 0) return;
+  r->wait = delay;
+}

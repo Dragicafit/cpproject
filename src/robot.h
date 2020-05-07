@@ -15,7 +15,7 @@ typedef struct {
   char mort;
   char *script;
   int id;
-  int wait;
+  int32_t wait;
   uint32_t adresses[ADRESSES_MAX];
 } robot;
 
