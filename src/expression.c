@@ -13,17 +13,17 @@
 robot *r;
 arene *a;
 
-int32_t par(int32_t exp1, char op, int32_t exp2) {
+int32_t par(int32_t exp1, operator op, int32_t exp2) {
   switch (op) {
-    case '+':
+    case PLUS:
       return exp1 + exp2;
-    case '-':
+    case MINUS:
       return exp1 - exp2;
-    case '*':
+    case MULT:
       return exp1 * exp2;
-    case '/':
+    case DIV:
       return exp1 / exp2;
-    case '%':
+    case MOD:
       return exp1 % exp2;
     default:
       return 0;
@@ -60,4 +60,23 @@ int32_t TargetY(int32_t y1, int32_t angle, int32_t length) {
 
 int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
   return (int32_t)sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+char condition(int32_t exp1, comparison comp, int32_t exp2) {
+  switch (comp) {
+    case STRIC_INF:
+      return exp1 < exp2;
+    case INF:
+      return exp1 <= exp2;
+    case EQ:
+      return exp1 == exp2;
+    case DIFF:
+      return exp1 != exp2;
+    case SUP:
+      return exp1 >= exp2;
+    case STRICT_SUP:
+      return exp1 > exp2;
+    default:
+      return 0;
+  }
 }

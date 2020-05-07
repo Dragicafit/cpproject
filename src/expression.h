@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-int32_t par(int32_t exp1, char op, int32_t exp2);
+int32_t par(int32_t exp1, operator op, int32_t exp2);
 int32_t peek(int32_t exp);
 int32_t aleat(int32_t exp);
 int32_t cardinal();
@@ -16,5 +16,6 @@ int32_t angle(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
 int32_t TargetX(int32_t x1, int32_t angle, int32_t length);
 int32_t TargetY(int32_t y1, int32_t angle, int32_t length);
 int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
+char condition(int32_t exp1, comparison comp, int32_t exp2);
 
 #endif
