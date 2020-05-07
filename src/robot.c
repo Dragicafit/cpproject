@@ -5,6 +5,7 @@
 
 #include "constantes.h"
 #include "main.h"
+#include "math.h"
 
 robot *initRobot(float positionX, float positionY, char fichier[], int id) {
   robot *r = calloc(1, sizeof(robot));
@@ -34,8 +35,8 @@ void degats(robot *r, float d) {
 void miseAJourRobot(robot *r, int angle, float vitesse) {
   r->vitesse = vitesse;
   r->angle = angle;
-  r->position.x += (r->vitesse / 100) * VITESSE_MAX * (int)cos(r->angle);
-  r->position.y += (r->vitesse / 100) * VITESSE_MAX * (int)sin(r->angle);
+  r->position.x += (r->vitesse / 100) * VITESSE_MAX * cos(r->angle);
+  r->position.y += (r->vitesse / 100) * VITESSE_MAX * sin(r->angle);
   if (r->position.x > X) r->position.x = X - 10;
   if (r->position.x > Y) r->position.x = Y - 10;
 }
