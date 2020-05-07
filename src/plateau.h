@@ -7,6 +7,7 @@
 #include "constantes.h"
 #include "robot.h"
 
+void plateau(arene *plateau);
 void add_stats(arene *plateau, WINDOW *stats);
 void placer_robot(arene *plateau, WINDOW *vue);
 void position_missile(arene *plateau, WINDOW *vue);
