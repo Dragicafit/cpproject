@@ -3,6 +3,7 @@
 
 #include "constantes.h"
 #include "position.h"
+#include <stdint.h>
 
 typedef struct {
   pos position;
@@ -12,6 +13,7 @@ typedef struct {
   int angle;
   char mort;
   char *script;
+  int id;
   uint32_t adresses[ADRESSES_MAX];
 } robot;
 

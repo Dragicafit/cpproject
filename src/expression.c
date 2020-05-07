@@ -1,5 +1,6 @@
 #include "expression.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,6 +30,16 @@ int32_t par(int32_t exp1, char op, int32_t exp2) {
 
 int32_t peek(int32_t exp) { return r->adresses[exp]; }
 
-int32_t RAND(int32_t exp) { return rand() % exp; }
+int32_t aleat(int32_t exp) { return rand() % exp; }
 
 int32_t cardinal() { return ROBOT_MAX; }
+
+int32_t self() { return r->id; }
+
+int32_t speed() { return r->vitesse; }
+
+int32_t state(int32_t exp) { return PV_MAX - a->l_robot[exp]->degat; }
+
+int32_t gpsx(int32_t exp) { return a->l_robot[exp]->position.x - 5; }
+
+int32_t gpsy(int32_t exp) { return a->l_robot[exp]->position.y - 5; }

@@ -1,11 +1,16 @@
 #ifndef DEF_EXPRESSION
 #define DEF_EXPRESSION
 
-#include <ctype.h>
+#include <stdint.h>
 
 int32_t par(int32_t exp1, char op, int32_t exp2);
 int32_t peek(int32_t exp);
-int32_t RAND(int32_t exp);
+int32_t aleat(int32_t exp);
 int32_t cardinal();
+int32_t self();
+int32_t speed();
+int32_t state(int32_t exp);
+int32_t gpsx(int32_t exp);
+int32_t gpsy(int32_t exp);
 
 #endif

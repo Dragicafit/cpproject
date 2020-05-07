@@ -14,6 +14,7 @@
 #define DEGAT_200 0.05
 #define DEGAT_50 0.1
 #define ADRESSES_MAX 2000
+#define PV_MAX 100
 
 #define SIZE_X 10
 #define SIZE_Y 10
