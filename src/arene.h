@@ -8,6 +8,7 @@
 typedef struct {
   robot *l_robot[ROBOT_MAX];
   missile *l_missile[ROBOT_MAX * MISSILES_MAX];
+  int nb_missile;
 } arene;
 
 void cycle(arene *a);

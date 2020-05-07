@@ -21,4 +21,7 @@
 #define COLLISION 0.02
 #define MAX_LINES 512
 
+#define DELAY 33
+
+
 #endif

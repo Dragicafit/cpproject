@@ -22,7 +22,6 @@ void destruction(robot *r) {
 void degats(robot *r, float d) {
   if (r->mort != 1) r->degat += d;
 }
-
 void miseAJourRobot(robot *r, int angle, float vitesse) {
   r->vitesse = vitesse;
   r->angle = angle;
