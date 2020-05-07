@@ -82,3 +82,16 @@ char condition(int32_t exp1, comparison comp, int32_t exp2) {
 }
 
 void Goto(uint32_t nb) { r->ligne = nb; }
+
+void poke(int32_t add, int32_t value) { r->adresses[add] = value; }
+
+void ifThen(char condition, uint32_t number) {
+  if (condition) {
+    Goto(number);
+  }
+}
+
+void engine(uint32_t angle, uint32_t speed) {
+  r->vitesse = speed;
+  r->angle = angle;
+}
