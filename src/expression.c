@@ -100,3 +100,10 @@ void engine(uint32_t angle, uint32_t speed) {
   r->vitesse = speed;
   r->angle = angle;
 }
+
+void shoot(uint32_t angle, uint32_t distance) {
+  missile *m;
+  initMissile(m, r, distance, angle);
+  a->l_missile[a->nb_missile] = m;
+  a->nb_missile += 1;
+}
