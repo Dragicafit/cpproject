@@ -80,3 +80,5 @@ char condition(int32_t exp1, comparison comp, int32_t exp2) {
       return 0;
   }
 }
+
+void Goto(uint32_t nb) { r->ligne = nb; }
