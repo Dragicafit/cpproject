@@ -32,9 +32,7 @@ void degats(robot *r, float d) {
   if (r->mort != 1) r->degat += d;
 }
 
-void miseAJourRobot(robot *r, int angle, float vitesse) {
-  r->vitesse = vitesse;
-  r->angle = angle;
+void miseAJourRobot(robot *r) {
   r->position.x += (r->vitesse / 100) * VITESSE_MAX * cos(r->angle);
   r->position.y += (r->vitesse / 100) * VITESSE_MAX * sin(r->angle);
   if (r->position.x > X) r->position.x = X - 10;

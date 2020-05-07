@@ -32,6 +32,8 @@ void plateau(arene *plateau) {
   init_pair(7, COLOR_WHITE, COLOR_BLACK);
 
   while (1) {
+    cycle(plateau);
+
     box(vue, ACS_VLINE,
         ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes
                      // qui génèrent des bordures par défaut
@@ -43,9 +45,9 @@ void plateau(arene *plateau) {
     position_missile(plateau, vue);
     wattron(vue, COLOR_PAIR(1));
     wattroff(vue, COLOR_PAIR(1));
-    sleep(1);
     wclear(vue);
     wclear(stats);
+    sleep(1);
   }
   getch();
   endwin();

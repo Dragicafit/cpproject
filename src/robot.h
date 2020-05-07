@@ -37,7 +37,7 @@ union {
 } action;
 
 void nextInstruction(robot *r);  // int si erreur
-void miseAJourRobot(robot *r, int angle, float vitesse);
+void miseAJourRobot(robot *r);
 void degats(robot *r, float d);
 robot *initRobot(float positionX, float positionY, char fichier[], int id);
 void destruction(robot *r);
