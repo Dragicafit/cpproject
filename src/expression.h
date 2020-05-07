@@ -12,5 +12,9 @@ int32_t speed();
 int32_t state(int32_t exp);
 int32_t gpsx(int32_t exp);
 int32_t gpsy(int32_t exp);
+int32_t angle(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
+int32_t TargetX(int32_t x1, int32_t angle, int32_t length);
+int32_t TargetY(int32_t y1, int32_t angle, int32_t length);
+int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
 
 #endif
