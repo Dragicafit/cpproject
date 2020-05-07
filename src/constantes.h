@@ -13,6 +13,7 @@
 #define DEGAT_400 0.03
 #define DEGAT_200 0.05
 #define DEGAT_50 0.1
+#define ADRESSES_MAX 2000
 
 #define SIZE_X 10
 #define SIZE_Y 10
@@ -22,6 +23,5 @@
 #define MAX_LINES 512
 
 #define DELAY 33
-
 
 #endif

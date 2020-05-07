@@ -1,6 +1,7 @@
 #ifndef DEF_ROBOT
 #define DEF_ROBOT
 
+#include "constantes.h"
 #include "position.h"
 
 typedef struct {
@@ -11,6 +12,7 @@ typedef struct {
   int angle;
   char mort;
   char *script;
+  uint32_t adresses[ADRESSES_MAX];
 } robot;
 
 typedef struct {
