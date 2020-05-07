@@ -23,11 +23,7 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4, arene *plateau) {
   initscr();
   vue = subwin(stdscr, LINES, MSIZE_H, 0, 0);
   stats = subwin(stdscr, LINES, COLS / 4, 0, MSIZE_H);
-  box(vue, ACS_VLINE, ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes
-                                   // qui génèrent des bordures par défaut
-  box(stats, ACS_VLINE,
-      ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes qui génèrent
-                   // des bordures par défaut
+
   if(has_colors() == FALSE){
     endwin();
 		printf("Your terminal does not support color\n");
@@ -44,12 +40,20 @@ void plateau(robot *r1, robot *r2, robot *r3, robot *r4, arene *plateau) {
   init_pair(7, COLOR_WHITE, COLOR_BLACK);
 
   while(1){
+    box(vue, ACS_VLINE,
+        ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes
+                     // qui génèrent des bordures par défaut
+    box(stats, ACS_VLINE,
+        ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes qui génèrent
+                     // des bordures par défaut
     add_stats(r1, r2, r3, r4, stats);
     placer_robot(r1, r2, r3, r4, vue);
     position_missile(r1, r2, r3, r4,plateau, vue);
     wattron(vue,COLOR_PAIR(1));
     wattroff(vue,COLOR_PAIR(1));
     delay(1);
+    wclear(vue);
+    wclear(stats);
   }
   getch();
   endwin();
