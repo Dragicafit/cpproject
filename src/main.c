@@ -7,9 +7,9 @@
 #include "arene.h"
 #include "constantes.h"
 #include "missile.h"
+#include "parser.h"
 #include "plateau.h"
 #include "robot.h"
-
 
 #define DELAY 33
 #define MSIZE_H (3 * (COLS / 4))
@@ -33,5 +33,8 @@ int main(int argc, char *argv[]) {
 
   arene *plat = malloc(sizeof(arene));
 
-  plateau(r1, r2, r3, r4, plat);
+  // plateau(r1, r2, r3, r4, plat);
+
+  if (argc != ROBOT_MAX + 1) return -1;
+  parser(&argv[1]);
 }

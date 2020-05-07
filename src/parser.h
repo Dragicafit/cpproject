@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "constantes.h"
+
 typedef enum { PLUS, MINUS, MULT, DIV, MOD } operator;
 
 typedef enum { STRIC_INF, INF, EQ, DIFF, SUP, STRICT_SUP } comparison;
@@ -72,6 +74,6 @@ program* isProgram(FILE* f, char* name);
 condition* isCondition(FILE* f, char* name);
 command* isCommand(FILE* f, char* name);
 
-void parser(int argc, char const* argv[]);
+void parser(char* fichiers[ROBOT_MAX]);
 
 #endif

@@ -74,7 +74,7 @@ expression* isExpression(FILE* f, char* name) {
   printf("isExpression : %s ", name);
 
   expression* expression1 = calloc(1, sizeof(expression));
-  char buff[128];
+  char buff[1285];
 
   if (isInteger(name)) {
     expression1->type = INT;
@@ -173,7 +173,7 @@ condition* isCondition(FILE* f, char* name) {
   printf("isCondition : %s ", name);
 
   condition* condition1 = calloc(1, sizeof(condition));
-  char buff[128];
+  char buff[1285];
 
   condition1->expression1 = isExpression(f, name);
   if (condition1->expression1 == NULL) return NULL;
@@ -200,7 +200,7 @@ line* isLine(FILE* f, char* name) {
   printf("isLine : %s ", name);
 
   line* line1 = calloc(1, sizeof(line));
-  char buff[128];
+  char buff[1285];
 
   if (!isNumber(name)) return NULL;
   line1->number = strtoul(name, NULL, 10);
@@ -219,7 +219,7 @@ line* isLine(FILE* f, char* name) {
 program* isProgram(FILE* f, char* name) {
   printf("isProgram : %s ", name);
 
-  char buff[128];
+  char buff[1285];
   int i = 0;
 
   line* lines[MAX_LINES];
@@ -228,8 +228,10 @@ program* isProgram(FILE* f, char* name) {
 
   for (i = 1;; i++) {
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) break;
     lines[i] = isLine(f, buff);
     if (lines[i] == NULL) {
+      printf("NULL\n");
       fseek(f, rewind, SEEK_CUR);
       break;
     }
@@ -237,7 +239,7 @@ program* isProgram(FILE* f, char* name) {
   program* program1 = calloc(1, sizeof(program) + i * sizeof(line*));
   program1->length = i * sizeof(line*);
 
-  memcpy(program1->lines, lines, i * MAX_LINES);
+  memcpy(program1->lines, lines, i * sizeof(line*));
 
   printf("1\n");
   return program1;
@@ -247,7 +249,7 @@ command* isCommand(FILE* f, char* name) {
   printf("isCommand : %s ", name);
 
   command* command1 = calloc(1, sizeof(command));
-  char buff[128];
+  char buff[1285];
   if (strcmp(name, "WAIT") == 0) {
     command1->type = WAIT;
 
@@ -321,17 +323,16 @@ command* isCommand(FILE* f, char* name) {
   return NULL;
 }
 
-void parser(int argc, char const* argv[]) {
-  for (int i = 1; i < argc; i++) {
-    FILE* f = fopen(argv[i], "r");
-    if (f == NULL) handle_error("fopen");
-    char buff[128];
-    fscanf(f, "%s ", buff);
-    printProgram(isProgram(f, buff));
-  }
-}
+void parser(char* fichiers[ROBOT_MAX]) {
+  for (int i = 0; i < ROBOT_MAX; i++) {
+    FILE* fichier = fopen(fichiers[i], "r");
+    if (fichier == NULL) handle_error("fopen");
 
-int main(int argc, char const* argv[]) {
-  parser(argc, argv);
-  return 0;
+    char buff[1285] = "";
+    fscanf(fichier, "%s ", buff);
+    printf("debut ! %i : \n", i);
+    printProgram(isProgram(fichier, buff));
+    printf("\n");
+    fclose(fichier);
+  }
 }
