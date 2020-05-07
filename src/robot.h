@@ -1,9 +1,10 @@
 #ifndef DEF_ROBOT
 #define DEF_ROBOT
 
+#include <stdint.h>
+
 #include "constantes.h"
 #include "position.h"
-#include <stdint.h>
 
 typedef struct {
   pos position;
@@ -14,6 +15,7 @@ typedef struct {
   char mort;
   char *script;
   int id;
+  int wait;
   uint32_t adresses[ADRESSES_MAX];
 } robot;
 
