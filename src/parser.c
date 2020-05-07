@@ -323,16 +323,13 @@ command* isCommand(FILE* f, char* name) {
   return NULL;
 }
 
-void parser(char* fichiers[ROBOT_MAX]) {
-  for (int i = 0; i < ROBOT_MAX; i++) {
-    FILE* fichier = fopen(fichiers[i], "r");
-    if (fichier == NULL) handle_error("fopen");
+program* parser(char nom[]) {
+  FILE* fichier = fopen(nom, "r");
+  if (fichier == NULL) handle_error("fopen");
 
-    char buff[1285] = "";
-    fscanf(fichier, "%s ", buff);
-    printf("debut ! %i : \n", i);
-    printProgram(isProgram(fichier, buff));
-    printf("\n");
-    fclose(fichier);
-  }
+  char buff[1285] = "";
+  fscanf(fichier, "%s ", buff);
+  program* p = isProgram(fichier, buff);
+  fclose(fichier);
+  return p;
 }

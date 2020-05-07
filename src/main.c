@@ -15,26 +15,17 @@
 #define MSIZE_H (3 * (COLS / 4))
 
 int main(int argc, char *argv[]) {
-  robot *r1 = malloc(sizeof(robot));
-  pos p1 = {1.0, 1.0};
-  init(r1, p1);
+  if (argc != ROBOT_MAX + 1) return -1;
 
-  robot *r2 = malloc(sizeof(robot));
-  pos p2 = {10000.0, 1.0};
-  init(r2, p2);
+  robot *r1 = init(1.0, 1.0, argv[1], 0);
 
-  robot *r3 = malloc(sizeof(robot));
-  pos p3 = {1.0, 10000.0};
-  init(r3, p3);
+  robot *r2 = init(10000.0, 1.0, argv[2], 1);
 
-  robot *r4 = malloc(sizeof(robot));
-  pos p4 = {10000.0, 10000.0};
-  init(r4, p4);
+  robot *r3 = init(1.0, 10000.0, argv[3], 2);
+
+  robot *r4 = init(10000.0, 10000.0, argv[4], 3);
 
   arene *plat = malloc(sizeof(arene));
 
-  // plateau(r1, r2, r3, r4, plat);
-
-  if (argc != ROBOT_MAX + 1) return -1;
-  parser(&argv[1]);
+  plateau(r1, r2, r3, r4, plat);
 }

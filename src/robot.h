@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "constantes.h"
+#include "parser.h"
 #include "position.h"
 
 typedef struct {
@@ -13,7 +14,7 @@ typedef struct {
   int nb_missiles;
   int angle;
   char mort;
-  char *script;
+  program *script;
   int id;
   int32_t wait;
   uint32_t adresses[ADRESSES_MAX];
@@ -38,7 +39,7 @@ union {
 void nextInstruction(robot *r);  // int si erreur
 void miseAJourRobot(robot *r, int angle, float vitesse);
 void degats(robot *r, float d);
-void init(robot *r, pos position);
+robot *init(float positionX, float positionY, char fichier[], int id);
 void destruction(robot *r);
 
 #endif

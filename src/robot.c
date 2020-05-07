@@ -6,13 +6,21 @@
 #include "constantes.h"
 #include "main.h"
 
-void init(robot *r, pos position) {
+robot *init(float positionX, float positionY, char fichier[], int id) {
+  robot *r = calloc(1, sizeof(robot));
   r->degat = 0;
   r->mort = 0;
-  r->nb_missiles = 0;
-  r->position = position;
   r->vitesse = 0;
-  // r->script = malloc();
+  r->nb_missiles = 0;
+  r->angle = 0;
+  r->position.x = positionX;
+  r->position.y = positionY;
+
+  r->script = parser(fichier);
+  r->id = id;
+  r->ligne = 0;
+  r->wait = 0;
+  return r;
 }
 
 void destruction(robot *r) {

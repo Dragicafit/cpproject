@@ -74,6 +74,6 @@ program* isProgram(FILE* f, char* name);
 condition* isCondition(FILE* f, char* name);
 command* isCommand(FILE* f, char* name);
 
-void parser(char* fichiers[ROBOT_MAX]);
+program* parser(char nom[]);
 
 #endif
