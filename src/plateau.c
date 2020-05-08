@@ -11,18 +11,42 @@
 #include "plateau.h"
 #include "robot.h"
 
-void plateau(arene *plateau) {
-  WINDOW *vue, *stats;
+WINDOW *initVue() {
+  WINDOW *vue;
   initscr();
   vue = subwin(stdscr, LINES, MSIZE_H, 0, 0);
-  stats = subwin(stdscr, LINES, COLS / 4, 0, MSIZE_H);
+  return vue;
+}
 
+WINDOW *initStats() {
+  WINDOW *stats;
+  initscr();
+  stats = subwin(stdscr, LINES, COLS / 4, 0, MSIZE_H);
+  return stats;
+}
+
+void cycle_plateau(WINDOW *vue, WINDOW *stats, arene *plateau) {
+  // Pour gérer la modification de la taille du terminal
+  box(vue, ACS_VLINE,
+      ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes
+                   // qui génèrent des bordures par défaut
+  box(stats, ACS_VLINE,
+      ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes qui génèrent
+                   // des bordures par défaut
+  // Cycle d'affichage
+  add_stats(plateau, stats);
+  placer_robot(plateau, vue);
+  position_missile(plateau, vue);
+  wclear(vue);
+  wclear(stats);
+}
+
+void startColor() {
   if (has_colors() == FALSE) {
     endwin();
     printf("Your terminal does not support color\n");
     exit(1);
   }
-  // Start color
   start_color();
   init_pair(1, COLOR_RED, COLOR_BLACK);
   init_pair(2, COLOR_GREEN, COLOR_BLACK);
@@ -31,28 +55,28 @@ void plateau(arene *plateau) {
   init_pair(5, COLOR_CYAN, COLOR_BLACK);
   init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
   init_pair(7, COLOR_WHITE, COLOR_BLACK);
+}
 
-  while (1) {
-    cycle(plateau);
-
-    box(vue, ACS_VLINE,
-        ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes
-                     // qui génèrent des bordures par défaut
-    box(stats, ACS_VLINE,
-        ACS_HLINE);  // ACS_VLINE et ACS_HLINE sont des constantes qui génèrent
-                     // des bordures par défaut
-    add_stats(plateau, stats);
-    placer_robot(plateau, vue);
-    position_missile(plateau, vue);
-    wattron(vue, COLOR_PAIR(1));
-    wattroff(vue, COLOR_PAIR(1));
-    wclear(vue);
-    wclear(stats);
-    sleep(1);
-  }
+void end_vue(WINDOW *vue, WINDOW *stats) {
   getch();
   endwin();
   free(vue);
+  free(stats);
+}
+
+void plateau(arene *plateau) {
+  WINDOW *vue = initVue();
+  WINDOW *stats = initStats();
+
+  // Start color
+  startColor();
+
+  while (1) {
+    cycle(plateau);
+    cycle_plateau(vue, stats, plateau);
+    sleep(1);
+  }
+  end_vue(vue, stats);
 }
 
 void add_stats(arene *plateau, WINDOW *stats) {
@@ -61,7 +85,7 @@ void add_stats(arene *plateau, WINDOW *stats) {
   wattroff(stats, COLOR_PAIR(1));
   mvwprintw(stats, 2, 1, "%.5f, %.5f", plateau->l_robot[0]->position.x,
             plateau->l_robot[0]->position.y);
-  mvwprintw(stats, 3, 1, "Missiles lancé(s): %i",
+  mvwprintw(stats, 3, 1, "Missiles en cours: %i",
             plateau->l_robot[0]->nb_missiles);
 
   wattron(stats, COLOR_PAIR(2));

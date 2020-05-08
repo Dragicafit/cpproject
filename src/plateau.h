@@ -7,6 +7,11 @@
 #include "constantes.h"
 #include "robot.h"
 
+WINDOW *initVue();
+WINDOW *initStats();
+void startColor();
+void cycle_plateau(WINDOW *vue, WINDOW *stats, arene *plateau);
+void end_vue();
 void plateau(arene *plateau);
 void add_stats(arene *plateau, WINDOW *stats);
 void placer_robot(arene *plateau, WINDOW *vue);
