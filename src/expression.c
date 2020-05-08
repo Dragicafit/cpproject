@@ -62,8 +62,10 @@ int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
   return (int32_t)sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-char conditions(int32_t exp1, comparison comp, int32_t exp2) {
-  switch (comp) {
+char conditions(condition *condition) {
+  int32_t exp1 = Expression(condition->expression1);
+  int32_t exp2 = Expression(condition->expression2);
+  switch (condition->comparison) {
     case STRIC_INF:
       return exp1 < exp2;
     case INF:
@@ -115,25 +117,66 @@ void Shoot(uint32_t angle, uint32_t distance) {
 void Command(command *c) {
   switch (c->type) {
     case WAIT:
-      Wait(c->expression1->integer);
+      Wait(Expression(c->expression1));
       break;
     case GOTO:
       Goto(c->number);
       break;
     case IF:
-      ifThen(conditions(c->condition->expression1->integer,
-                        c->condition->comparison,
-                        c->condition->expression2->integer),
-             c->number);
+      ifThen(conditions(c->condition), c->number);
       break;
     case POKE:
-      poke(c->expression1->integer, c->expression2->integer);
+      poke(Expression(c->expression1), Expression(c->expression2));
     case ENGINE:
-      Engine(c->expression1->integer, c->expression2->integer);
+      Engine(Expression(c->expression1), Expression(c->expression2));
     case SHOOT:
-      Shoot(c->expression1->integer, c->expression2->integer);
+      Shoot(Expression(c->expression1), Expression(c->expression2));
       break;
     default:
       break;
   }
 }
+
+uint32_t Expression(expression *exp) {
+  switch (exp->type) {
+    case INT:
+      return exp->integer;
+      break;
+    case PAR:
+      return par(Expression(exp->expression1[0]), exp->operator,
+                 Expression(exp->expression1[1]));
+    case PEEK:
+      return peek(Expression(exp->expression1[0]));
+    case RAND:
+      return aleat(Expression(exp->expression1[0]));
+    case CARDINAL:
+      return cardinal();
+    case SELF:
+      return self();
+    case SPEED:
+      return speed();
+    case STATE:
+      return state(Expression(exp->expression1[0]));
+    case GPSX:
+      return gpsx(Expression(exp->expression1[0]));
+    case GPSY:
+      return gpsy(Expression(exp->expression1[0]));
+    case ANGLE:
+      return angle(
+          Expression(exp->expression1[0]), Expression(exp->expression1[1]),
+          Expression(exp->expression1[2]), Expression(exp->expression1[3]));
+    case TARGETX:
+      return TargetX(Expression(exp->expression1[0]),
+                     Expression(exp->expression1[1]),
+                     Expression(exp->expression1[2]));
+    case TARGETY:
+      return TargetY(Expression(exp->expression1[0]),
+                     Expression(exp->expression1[1]),
+                     Expression(exp->expression1[2]));
+    case DISTANCE:
+      return distance(
+          Expression(exp->expression1[0]), Expression(exp->expression1[1]),
+          Expression(exp->expression1[2]), Expression(exp->expression1[3]));
+    default:
+      return 0;
+  }
