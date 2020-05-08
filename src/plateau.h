@@ -8,6 +8,7 @@
 
 #include "arene.h"
 #include "constantes.h"
+#include "modele.h"
 #include "robot.h"
 
 static const char robot_visu[4] = {'A', 'B', 'C', 'D'};

@@ -6,6 +6,7 @@
 #include "constantes.h"
 #include "main.h"
 #include "math.h"
+#include "modele.h"
 
 robot *initRobot(float positionX, float positionY, char fichier[], int id) {
   robot *r = calloc(1, sizeof(robot));

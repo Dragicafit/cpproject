@@ -74,7 +74,7 @@ void plateau(arene *plateau) {
 
   while (1) {
     cycle_script(plateau);
-    cycle(plateau);
+    cycle_physique(plateau);
     cycle_plateau(vue, stats, plateau);
     usleep(100000);
   }

@@ -7,6 +7,7 @@
 #include "arene.h"
 #include "constantes.h"
 #include "missile.h"
+#include "modele.h"
 #include "parser.h"
 #include "plateau.h"
 #include "robot.h"

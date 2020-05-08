@@ -7,6 +7,7 @@
 #include "constantes.h"
 #include "main.h"
 #include "missile.h"
+#include "modele.h"
 #include "robot.h"
 
 arene *initArene(char *fichiers[ROBOT_MAX]) {
@@ -21,9 +22,9 @@ arene *initArene(char *fichiers[ROBOT_MAX]) {
   return a;
 }
 
-void cycle(arene *a) {
+void cycle_physique(arene *a) {
   for (int i = 0; i < a->nb_missile; i++) {
-    miseAJourMissile(a->l_missile[i]);
+    miseAJourMissile(a, i);
   }
   for (int i = 0; i < ROBOT_MAX; i++) {
     miseAJourRobot(a->l_robot[i]);
@@ -64,7 +65,10 @@ void collisionRtoM(arene *a, robot *r, missile *m) {
 void collisionMtoW(arene *a, missile *m) { exploseRobots(a, m); }
 
 void exploseRobots(arene *a, missile *m) {
-  for (int i = 0; i < sizeof(a->l_robot) / sizeof(robot); i++)
-    collisionRtoE(a->l_robot[i], m);
-  explose(m);
+  for (int i = 0; i < ROBOT_MAX; i++) collisionRtoE(a->l_robot[i], m);
+  int i;
+  for (i = 0; i < a->nb_missile; i++) {
+    if (a->l_missile[i] == m) break;
+  }
+  explose(a, i);
 }
