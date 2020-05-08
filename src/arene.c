@@ -23,11 +23,9 @@ arene *initArene(char *fichiers[ROBOT_MAX]) {
 
 void cycle(arene *a) {
   for (int i = 0; i < a->nb_missile; i++) {
-    pos position = {1, 1};
     miseAJourMissile(a->l_missile[i]);
   }
   for (int i = 0; i < ROBOT_MAX; i++) {
-    pos position = {1, 1};
     miseAJourRobot(a->l_robot[i]);
   }
 }
