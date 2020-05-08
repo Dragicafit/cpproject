@@ -12,6 +12,22 @@
 #include "plateau.h"
 #include "robot.h"
 
+void plateau(arene *plateau) {
+  WINDOW *vue = initVue();
+  WINDOW *stats = initStats();
+
+  // Start color
+  startColor();
+
+  while (1) {
+    cycle_script(plateau);
+    cycle_physique(plateau);
+    cycle_plateau(vue, stats, plateau);
+    usleep(100000);
+  }
+  end_vue(vue, stats);
+}
+
 WINDOW *initVue() {
   WINDOW *vue;
   initscr();
@@ -65,22 +81,6 @@ void end_vue(WINDOW *vue, WINDOW *stats) {
   free(stats);
 }
 
-void plateau(arene *plateau) {
-  WINDOW *vue = initVue();
-  WINDOW *stats = initStats();
-
-  // Start color
-  startColor();
-
-  while (1) {
-    cycle_script(plateau);
-    cycle_physique(plateau);
-    cycle_plateau(vue, stats, plateau);
-    usleep(100000);
-  }
-  end_vue(vue, stats);
-}
-
 void add_stats(arene *plateau, WINDOW *stats) {
   int couleur = 1;
   int pos = 1;
@@ -104,8 +104,8 @@ void add_stats(arene *plateau, WINDOW *stats) {
 }
 
 void placer_robot(arene *plateau, WINDOW *vue) {
-  float echy = (((float)LINES) / 10000.0);
-  float echx = ((float)MSIZE_H / 10000.0);
+  float echy = (LINES / 10000.0);
+  float echx = (MSIZE_H / 10000.0);
   int couleur = 1;
 
   for (int i = 0; i < ROBOT_MAX; i++) {
@@ -123,22 +123,12 @@ void position_missile(arene *plateau, WINDOW *vue) {
     missile *m = plateau->l_missile[i];
     float x = m->position.x * echx;
     float y = m->position.y * echy;
-    if (m->parent == plateau->l_robot[0]) {
-      wattron(vue, COLOR_PAIR(1));
-      mvwaddch(vue, y, x, 'o');
-      wattroff(vue, COLOR_PAIR(1));
-    } else if (m->parent == plateau->l_robot[1]) {
-      wattron(vue, COLOR_PAIR(2));
-      mvwaddch(vue, y, x, 'o');
-      wattroff(vue, COLOR_PAIR(2));
-    } else if (m->parent == plateau->l_robot[2]) {
-      wattron(vue, COLOR_PAIR(3));
-      mvwaddch(vue, y, x, 'o');
-      wattroff(vue, COLOR_PAIR(3));
-    } else {
-      wattron(vue, COLOR_PAIR(4));
-      mvwaddch(vue, y, x, 'o');
-      wattroff(vue, COLOR_PAIR(4));
+    for (int j = 0; j < ROBOT_MAX; j++) {
+      if (m->parent == plateau->l_robot[j]) {
+        wattron(vue, COLOR_PAIR(j + 1));
+        mvwaddch(vue, y, x, 'o');
+        wattroff(vue, COLOR_PAIR(j + 1));
+      }
     }
     wrefresh(vue);
   }
