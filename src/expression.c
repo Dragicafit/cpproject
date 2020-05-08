@@ -111,3 +111,29 @@ void Shoot(uint32_t angle, uint32_t distance) {
   a->nb_missile += 1;
   r->nb_missiles += 1;
 }
+
+void Command(command *c) {
+  switch (c->type) {
+    case WAIT:
+      Wait(c->expression1->integer);
+      break;
+    case GOTO:
+      Goto(c->number);
+      break;
+    case IF:
+      ifThen(conditions(c->condition->expression1->integer,
+                        c->condition->comparison,
+                        c->condition->expression2->integer),
+             c->number);
+      break;
+    case POKE:
+      poke(c->expression1->integer, c->expression2->integer);
+    case ENGINE:
+      Engine(c->expression1->integer, c->expression2->integer);
+    case SHOOT:
+      Shoot(c->expression1->integer, c->expression2->integer);
+      break;
+    default:
+      break;
+  }
+}
