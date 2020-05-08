@@ -116,30 +116,28 @@ void placer_robot(arene *plateau, WINDOW *vue) {
 void position_missile(arene *plateau, WINDOW *vue) {
   float echy = (((float)LINES) / 10000.0);
   float echx = ((float)MSIZE_H / 10000.0);
-  if (plateau->nb_missile > 0) {
-    for (int i = 0; i < plateau->nb_missile; i++) {
-      missile *m = plateau->l_missile[i];
-      float x = m->position.x * echx;
-      float y = m->position.y * echy;
-      if (m->parent == plateau->l_robot[0]) {
-        wattron(vue, COLOR_PAIR(1));
-        mvwaddch(vue, y, x, '.');
-        wattroff(vue, COLOR_PAIR(1));
-      } else if (m->parent == plateau->l_robot[1]) {
-        wattron(vue, COLOR_PAIR(2));
-        mvwaddch(vue, y, x, '.');
-        wattroff(vue, COLOR_PAIR(2));
-      } else if (m->parent == plateau->l_robot[2]) {
-        wattron(vue, COLOR_PAIR(3));
-        mvwaddch(vue, y, x, '.');
-        wattroff(vue, COLOR_PAIR(3));
-      } else {
-        wattron(vue, COLOR_PAIR(4));
-        mvwaddch(vue, y, x, '.');
-        wattroff(vue, COLOR_PAIR(4));
-      }
-      wrefresh(vue);
+  for (int i = 0; i < plateau->nb_missile; i++) {
+    missile *m = plateau->l_missile[i];
+    float x = m->position.x * echx;
+    float y = m->position.y * echy;
+    if (m->parent == plateau->l_robot[0]) {
+      wattron(vue, COLOR_PAIR(1));
+      mvwaddch(vue, y, x, '.');
+      wattroff(vue, COLOR_PAIR(1));
+    } else if (m->parent == plateau->l_robot[1]) {
+      wattron(vue, COLOR_PAIR(2));
+      mvwaddch(vue, y, x, '.');
+      wattroff(vue, COLOR_PAIR(2));
+    } else if (m->parent == plateau->l_robot[2]) {
+      wattron(vue, COLOR_PAIR(3));
+      mvwaddch(vue, y, x, '.');
+      wattroff(vue, COLOR_PAIR(3));
+    } else {
+      wattron(vue, COLOR_PAIR(4));
+      mvwaddch(vue, y, x, '.');
+      wattroff(vue, COLOR_PAIR(4));
     }
+    wrefresh(vue);
   }
 }
 
