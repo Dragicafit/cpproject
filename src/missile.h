@@ -12,7 +12,7 @@ typedef struct {
   int angle;
 } missile;
 
-void initMissile(missile *m, robot *parent, int distance, int angle);
+missile *initMissile(robot *parent, int distance, int angle);
 void miseAJourMissile(missile *m);
 int explose(missile *m);
 

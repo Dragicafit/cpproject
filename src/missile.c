@@ -8,11 +8,13 @@
 #include "main.h"
 #include "robot.h"
 
-void initMissile(missile *m, robot *parent, int distance, int angle) {
+missile *initMissile(robot *parent, int distance, int angle) {
+  missile *m = calloc(1, sizeof(missile));
   m->parent = parent;
   m->position = parent->position;
   m->distanceExplosion = distance;
   m->angle = angle;
+  return m;
 }
 
 int explose(missile *m) {

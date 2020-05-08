@@ -242,6 +242,7 @@ program* isProgram(FILE* f, char* name) {
   memcpy(program1->lines, lines, i * sizeof(line*));
 
   printf("1\n");
+  printProgram(program1);
   return program1;
 }
 

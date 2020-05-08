@@ -73,10 +73,10 @@ void plateau(arene *plateau) {
   startColor();
 
   while (1) {
-    Line();
+    cycle_script(plateau);
     cycle(plateau);
     cycle_plateau(vue, stats, plateau);
-    sleep(1);
+    usleep(100000);
   }
   end_vue(vue, stats);
 }
