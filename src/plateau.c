@@ -93,7 +93,7 @@ void add_stats(arene *plateau, WINDOW *stats) {
   wattroff(stats, COLOR_PAIR(2));
   mvwprintw(stats, 7, 1, "%.5f, %.5f", plateau->l_robot[1]->position.x,
             plateau->l_robot[1]->position.y);
-  mvwprintw(stats, 8, 1, "Missiles lancé(s): %i",
+  mvwprintw(stats, 8, 1, "Missiles en cours: %i",
             plateau->l_robot[1]->nb_missiles);
 
   wattron(stats, COLOR_PAIR(3));
@@ -101,7 +101,7 @@ void add_stats(arene *plateau, WINDOW *stats) {
   wattroff(stats, COLOR_PAIR(3));
   mvwprintw(stats, 12, 1, "%.5f, %.5f", plateau->l_robot[2]->position.x,
             plateau->l_robot[2]->position.y);
-  mvwprintw(stats, 13, 1, "Missiles lancé(s): %i",
+  mvwprintw(stats, 13, 1, "Missiles en cours: %i",
             plateau->l_robot[2]->nb_missiles);
 
   wattron(stats, COLOR_PAIR(4));
