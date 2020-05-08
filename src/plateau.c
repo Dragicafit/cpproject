@@ -12,6 +12,8 @@
 #include "plateau.h"
 #include "robot.h"
 
+int currentL;
+
 WINDOW *initVue() {
   WINDOW *vue;
   initscr();
@@ -22,6 +24,7 @@ WINDOW *initVue() {
 WINDOW *initStats() {
   WINDOW *stats;
   initscr();
+  currentL = LINES;
   stats = subwin(stdscr, LINES, COLS / 4, 0, MSIZE_H);
   return stats;
 }
@@ -38,8 +41,11 @@ void cycle_plateau(WINDOW *vue, WINDOW *stats, arene *plateau) {
   add_stats(plateau, stats);
   placer_robot(plateau, vue);
   position_missile(plateau, vue);
-  wclear(vue);
-  wclear(stats);
+  if (currentL != LINES) {
+    currentL = LINES;
+    wclear(vue);
+    wclear(stats);
+  }
 }
 
 void startColor() {
@@ -95,7 +101,10 @@ void add_stats(arene *plateau, WINDOW *stats) {
     pos++;
     mvwprintw(stats, pos, 1, "Missiles en cours: %i",
               plateau->l_robot[i]->nb_missiles);
-    pos += 3;
+    pos++;
+    mvwprintw(stats, pos, 1, "Vie : %i",
+              PV_MAX - (int)plateau->l_robot[i]->degat);
+    pos += 2;
   }
   wrefresh(stats);
 }
@@ -122,19 +131,19 @@ void position_missile(arene *plateau, WINDOW *vue) {
     float y = m->position.y * echy;
     if (m->parent == plateau->l_robot[0]) {
       wattron(vue, COLOR_PAIR(1));
-      mvwaddch(vue, y, x, '.');
+      mvwaddch(vue, y, x, 'o');
       wattroff(vue, COLOR_PAIR(1));
     } else if (m->parent == plateau->l_robot[1]) {
       wattron(vue, COLOR_PAIR(2));
-      mvwaddch(vue, y, x, '.');
+      mvwaddch(vue, y, x, 'o');
       wattroff(vue, COLOR_PAIR(2));
     } else if (m->parent == plateau->l_robot[2]) {
       wattron(vue, COLOR_PAIR(3));
-      mvwaddch(vue, y, x, '.');
+      mvwaddch(vue, y, x, 'o');
       wattroff(vue, COLOR_PAIR(3));
     } else {
       wattron(vue, COLOR_PAIR(4));
-      mvwaddch(vue, y, x, '.');
+      mvwaddch(vue, y, x, 'o');
       wattroff(vue, COLOR_PAIR(4));
     }
     wrefresh(vue);
