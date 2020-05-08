@@ -19,9 +19,12 @@ int32_t TargetX(int32_t x1, int32_t angle, int32_t length);
 int32_t TargetY(int32_t y1, int32_t angle, int32_t length);
 int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
 void Wait(int32_t delay);
-char conditions(int32_t exp1, comparison comp, int32_t exp2);
+char conditions(condition *condition);
 void poke(int32_t add, int32_t value);
 void ifThen(char condition, uint32_t number);
 void Engine(uint32_t angle, uint32_t speed);
 void Shoot(uint32_t angle, uint32_t distance);
+void Command();
+uint32_t Expression(expression *exp);
+void Line();
 #endif

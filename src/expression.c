@@ -180,3 +180,13 @@ uint32_t Expression(expression *exp) {
     default:
       return 0;
   }
+}
+
+void Line() {
+  if (r->ligne >= r->script->length) {
+    r->mort = 1;
+    return;
+  }
+  command *c = r->script->lines[r->ligne++];
+  Command(c);
+}
