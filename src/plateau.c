@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #include "constantes.h"
+#include "expression.h"
 #include "main.h"
 #include "plateau.h"
 #include "robot.h"
@@ -72,6 +73,7 @@ void plateau(arene *plateau) {
   startColor();
 
   while (1) {
+    Line();
     cycle(plateau);
     cycle_plateau(vue, stats, plateau);
     sleep(1);

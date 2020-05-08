@@ -187,6 +187,6 @@ void Line() {
     r->mort = 1;
     return;
   }
-  command *c = r->script->lines[r->ligne++];
+  command *c = r->script->lines[r->ligne++]->command;
   Command(c);
 }
