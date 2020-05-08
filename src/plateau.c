@@ -12,8 +12,6 @@
 #include "plateau.h"
 #include "robot.h"
 
-int currentL;
-
 WINDOW *initVue() {
   WINDOW *vue;
   initscr();
@@ -24,7 +22,6 @@ WINDOW *initVue() {
 WINDOW *initStats() {
   WINDOW *stats;
   initscr();
-  currentL = LINES;
   stats = subwin(stdscr, LINES, COLS / 4, 0, MSIZE_H);
   return stats;
 }
@@ -41,11 +38,8 @@ void cycle_plateau(WINDOW *vue, WINDOW *stats, arene *plateau) {
   add_stats(plateau, stats);
   placer_robot(plateau, vue);
   position_missile(plateau, vue);
-  if (currentL != LINES) {
-    currentL = LINES;
-    wclear(vue);
-    wclear(stats);
-  }
+  wclear(vue);
+  wclear(stats);
 }
 
 void startColor() {
