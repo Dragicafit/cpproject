@@ -36,7 +36,7 @@ void miseAJourRobot(robot *r) {
   r->position.x += (r->vitesse / 100) * VITESSE_MAX * cos(r->angle);
   r->position.y += (r->vitesse / 100) * VITESSE_MAX * sin(r->angle);
   if (r->position.x > X) r->position.x = X - 5;
-  if (r->position.y > Y) r->position.x = Y - 5;
+  if (r->position.y > Y) r->position.y = Y - 5;
   if (r->position.x < 0) r->position.x = 5;
-  if (r->position.y < 0) r->position.x = 5;
+  if (r->position.y < 0) r->position.y = 5;
 }
