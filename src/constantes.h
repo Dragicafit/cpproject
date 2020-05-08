@@ -22,6 +22,7 @@
 #define MISSILES_MAX 2
 #define COLLISION 0.02
 #define MAX_LINES 512
+#define M_PI 3.14
 
 #define DELAY 33
 

@@ -8,6 +8,6 @@
 
 missile *initMissile(robot *parent, int distance, int angle);
 void miseAJourMissile(arene *a, int i);
-void explose(arene *a, int i);
+void explose(missile *m);
 
 #endif

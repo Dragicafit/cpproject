@@ -18,43 +18,38 @@ missile *initMissile(robot *parent, int distance, int angle) {
   m->distanceExplosion = distance;
   m->angle = angle;
   m->distance = 0;
+  m->aExplose = 0;
   return m;
 }
 
-void explose(arene *a, int i) {
-  missile *m = a->l_missile[i];
-  a->l_missile[i] = a->l_missile[a->nb_missile--];
-  m->parent->nb_missiles--;
-  free(m);
-}
+void explose(missile *m) { m->aExplose = 1; }
 
 void miseAJourMissile(arene *a, int i) {
   missile *m = a->l_missile[i];
-  write(0, "1\n", 2);
-  m->distance += m->distanceExplosion - m->distance < 500
-                     ? m->distanceExplosion - m->distance
-                     : 500;
+  m->distance = m->distanceExplosion - m->distance < 100
+                    ? m->distanceExplosion - m->distance
+                    : 100;
   m->position.x = TargetX(m->position.x, m->angle, m->distance);
-  m->position.y = TargetX(m->position.y, m->angle, m->distance);
+  m->position.y = TargetY(m->position.y, m->angle, m->distance);
   if (m->position.x > X) {
     m->position.x = X - 1;
-    explose(a, i);
+    exploseRobots(a, m);
     return;
   }
   if (m->position.y > Y) {
     m->position.y = Y - 1;
-    explose(a, i);
+    exploseRobots(a, m);
     return;
   }
   if (m->position.x < 0) {
     m->position.x = 1;
-    explose(a, i);
+    exploseRobots(a, m);
     return;
   }
   if (m->position.y < 0) {
     m->position.y = 1;
-    explose(a, i);
+    exploseRobots(a, m);
     return;
   }
-  if (m->distance >= m->distanceExplosion) explose(a, i);
+  if (m->distance >= m->distanceExplosion) explose(m);
 }

@@ -96,8 +96,8 @@ void add_stats(arene *plateau, WINDOW *stats) {
     mvwprintw(stats, pos, 1, "Missiles en cours: %i",
               plateau->l_robot[i]->nb_missiles);
     pos++;
-    mvwprintw(stats, pos, 1, "Vie : %i",
-              PV_MAX - (int)plateau->l_robot[i]->degat);
+    mvwprintw(stats, pos, 1, "Vie : %f",
+              PV_MAX * (1 - plateau->l_robot[i]->degat));
     pos += 2;
   }
   wrefresh(stats);

@@ -39,6 +39,7 @@ typedef struct {
   int distance;
   int distanceExplosion;
   int angle;
+  char aExplose;
 } missile;
 
 typedef struct {

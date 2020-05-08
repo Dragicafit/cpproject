@@ -45,19 +45,19 @@ int32_t gpsx(arene *a, int32_t exp) { return a->l_robot[exp]->position.x - 5; }
 int32_t gpsy(arene *a, int32_t exp) { return a->l_robot[exp]->position.y - 5; }
 
 int32_t angle(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
-  return (int32_t)atan((y2 - y1) - (x2 - x1));
+  return atan((y2 - y1) - (x2 - x1)) * 180 / M_PI;
 }
 
-int32_t TargetX(int32_t x1, int32_t angle, int32_t length) {
-  return (int32_t)(x1 + length * cos(angle));
+float TargetX(float x1, int32_t angle, float length) {
+  return x1 + length * cos(angle * M_PI / 180);
 }
 
-int32_t TargetY(int32_t y1, int32_t angle, int32_t length) {
-  return (int32_t)(y1 + length * sin(angle));
+float TargetY(float y1, int32_t angle, float length) {
+  return y1 + length * sin(angle * M_PI / 180);
 }
 
-int32_t distance(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
-  return (int32_t)sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+float distance(float x1, float y1, float x2, float y2) {
+  return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
 char conditions(arene *a, robot *r, condition *condition) {

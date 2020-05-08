@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "constantes.h"
+#include "expression.h"
 #include "main.h"
 #include "missile.h"
 #include "modele.h"
@@ -25,9 +26,24 @@ arene *initArene(char *fichiers[ROBOT_MAX]) {
 void cycle_physique(arene *a) {
   for (int i = 0; i < a->nb_missile; i++) {
     miseAJourMissile(a, i);
+    if (a->l_missile[i]->aExplose) continue;
+    for (int j = 0; j < ROBOT_MAX; j++) {
+      collisionRtoM(a, a->l_robot[j], a->l_missile[i]);
+    }
+  }
+  for (int i = 0; i < a->nb_missile; i++) {
+    if (!a->l_missile[i]->aExplose) continue;
+    missile *m = a->l_missile[i];
+    a->l_missile[i] = a->l_missile[--a->nb_missile];
+    m->parent->nb_missiles--;
+    free(m);
+    i--;
   }
   for (int i = 0; i < ROBOT_MAX; i++) {
     miseAJourRobot(a->l_robot[i]);
+    for (int j = i; j < ROBOT_MAX; j++) {
+      collisionRtoR(a->l_robot[i], a->l_robot[j]);
+    }
   }
 }
 
@@ -39,20 +55,14 @@ void collisionRtoR(robot *r1, robot *r2) {
   }
 }
 
-void collisionRtoW(robot *r) {
-  if (X - r->position.x < SIZE_X || r->position.x < SIZE_X ||
-      Y - r->position.y < SIZE_Y || r->position.y < SIZE_Y)
-    degats(r, COLLISION);
-}
-
 void collisionRtoE(robot *r, missile *m) {
-  float distance =
-      sqrt((r->position.x - m->position.x) + (r->position.y - m->position.y));
-  if (distance <= DIST_50)
+  uint32_t dist =
+      distance(r->position.x, r->position.y, m->position.x, m->position.y);
+  if (dist <= DIST_50)
     degats(r, DEGAT_50);
-  else if (distance <= DIST_200)
+  else if (dist <= DIST_200)
     degats(r, DEGAT_200);
-  else if (distance <= DIST_400)
+  else if (dist <= DIST_400)
     degats(r, DEGAT_400);
 }
 
@@ -62,13 +72,7 @@ void collisionRtoM(arene *a, robot *r, missile *m) {
     exploseRobots(a, m);
 }
 
-void collisionMtoW(arene *a, missile *m) { exploseRobots(a, m); }
-
 void exploseRobots(arene *a, missile *m) {
   for (int i = 0; i < ROBOT_MAX; i++) collisionRtoE(a->l_robot[i], m);
-  int i;
-  for (i = 0; i < a->nb_missile; i++) {
-    if (a->l_missile[i] == m) break;
-  }
-  explose(a, i);
+  explose(m);
 }

@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "constantes.h"
+#include "expression.h"
 #include "main.h"
 #include "math.h"
 #include "modele.h"
@@ -26,18 +27,34 @@ robot *initRobot(float positionX, float positionY, char fichier[], int id) {
 }
 
 void destruction(robot *r) {
-  if (r->degat >= 1) r->mort = 1;
+  if (r->degat < 1) return;
+  r->mort = 1;
 }
 
 void degats(robot *r, float d) {
-  if (r->mort != 1) r->degat += d;
+  if (r->mort) return;
+  r->degat += d;
 }
 
 void miseAJourRobot(robot *r) {
-  r->position.x += (r->vitesse / 100) * VITESSE_MAX * cos(r->angle);
-  r->position.y += (r->vitesse / 100) * VITESSE_MAX * sin(r->angle);
-  if (r->position.x > X) r->position.x = X - 5;
-  if (r->position.y > Y) r->position.y = Y - 5;
-  if (r->position.x < 0) r->position.x = 5;
-  if (r->position.y < 0) r->position.y = 5;
+  r->position.x =
+      TargetX(r->position.x, r->angle, r->vitesse / 100 * VITESSE_MAX);
+  r->position.y =
+      TargetY(r->position.y, r->angle, r->vitesse / 100 * VITESSE_MAX);
+  if (r->position.x + SIZE_X / 2 > X) {
+    r->position.x = X - 5;
+    degats(r, COLLISION);
+  }
+  if (r->position.y + SIZE_Y / 2 > Y) {
+    r->position.y = Y - 5;
+    degats(r, COLLISION);
+  }
+  if (r->position.x - SIZE_X / 2 < 0) {
+    r->position.x = 5;
+    degats(r, COLLISION);
+  }
+  if (r->position.y - SIZE_Y / 2 < 0) {
+    r->position.y = 5;
+    degats(r, COLLISION);
+  }
 }
