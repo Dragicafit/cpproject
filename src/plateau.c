@@ -14,12 +14,12 @@
 #include "robot.h"
 
 char isWinner(arene *p) {
-  int count = ROBOT_MAX;
+  int count = 0;
   for (int i = 0; i < ROBOT_MAX; i++) {
     if (!p->l_robot[i]->mort) continue;
-    count--;
+    count++;
   }
-  return count <= 1;
+  return count >= ROBOT_MAX - 1;
 }
 
 void plateau(arene *plateau) {
@@ -117,7 +117,7 @@ void add_stats(arene *plateau, WINDOW *stats) {
     mvwprintw(stats, pos, 1, "Missiles en cours: %i",
               plateau->l_robot[i]->nb_missiles);
     pos++;
-    if (plateau->l_robot[i]->degat <= 1) {
+    if (!plateau->l_robot[i]->mort) {
       mvwprintw(stats, pos, 1, "Vie : %f",
                 PV_MAX * (1 - plateau->l_robot[i]->degat));
     } else {
@@ -134,7 +134,7 @@ void placer_robot(arene *plateau, WINDOW *vue) {
   int couleur = 1;
 
   for (int i = 0; i < ROBOT_MAX; i++) {
-    if (plateau->l_robot[i]->degat <= 1) {
+    if (!plateau->l_robot[i]->mort) {
       wattron(vue, COLOR_PAIR(couleur));
       robot_mur(plateau->l_robot[i], robot_visu[i], echx, echy, vue);
       wattroff(vue, COLOR_PAIR(couleur));
