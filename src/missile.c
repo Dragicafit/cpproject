@@ -29,25 +29,31 @@ void miseAJourMissile(arene *a, int i) {
   m->distance = m->distanceExplosion - m->distance < MISSILE_SPEED
                     ? m->distanceExplosion
                     : MISSILE_SPEED;
+  float x = m->position.x;
+  float y = m->position.y;
   m->position.x = TargetX(m->position.x, m->angle, m->distance);
   m->position.y = TargetY(m->position.y, m->angle, m->distance);
-  if (m->position.x > X) {
-    m->position.x = X - 1;
+  if (m->position.x >= X) {
+    m->position.x = X;
+    m->position.y = (Y - y) * (m->position.x - x) / (m->position.y - y);
     exploseRobots(a, m);
     return;
   }
-  if (m->position.y > Y) {
-    m->position.y = Y - 1;
+  if (m->position.y >= Y) {
+    m->position.x = (X - x) * (m->position.y - y) / (m->position.x - x);
+    m->position.y = Y;
     exploseRobots(a, m);
     return;
   }
-  if (m->position.x < 0) {
-    m->position.x = 1;
+  if (m->position.x <= 0) {
+    m->position.x = 0;
+    m->position.y = y * (m->position.x - x) / (m->position.y - y);
     exploseRobots(a, m);
     return;
   }
-  if (m->position.y < 0) {
-    m->position.y = 1;
+  if (m->position.y <= 0) {
+    m->position.x = x * (m->position.y - y) / (m->position.x - x);
+    m->position.y = 0;
     exploseRobots(a, m);
     return;
   }
