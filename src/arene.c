@@ -78,6 +78,7 @@ void collisionRtoM(arene *a, robot *r, missile *m) {
   if (abs(r->position.x - m->position.x) >= SIZE_X ||
       abs(r->position.y - m->position.y) >= SIZE_Y)
     return;
+  if (m->parent == r) return;
   exploseRobots(a, m);
 }
 
