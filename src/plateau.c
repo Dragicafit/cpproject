@@ -111,10 +111,10 @@ void add_stats(arene *plateau, WINDOW *stats) {
               plateau->l_robot[i]->nb_missiles);
     pos++;
     if (plateau->l_robot[i]->degat <= 1) {
-      mvwprintw(stats, pos, 1, "Vie : %i",
+      mvwprintw(stats, pos, 1, "Vie : %f",
                 PV_MAX * (1 - plateau->l_robot[i]->degat));
     } else {
-      mvwprintw(stats, pos, 1, "Vie : Vous êtes mort, (%i)",
+      mvwprintw(stats, pos, 1, "Vie : Vous êtes mort, (%f)",
                 PV_MAX * (1 - plateau->l_robot[i]->degat));
     }
     mvwprintw(stats, pos + 1, 1, "Etat: %i", plateau->l_robot[i]->mort);

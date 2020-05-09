@@ -42,17 +42,20 @@ void miseAJourRobot(robot *r) {
       TargetX(r->position.x, r->angle, r->vitesse / 100 * VITESSE_MAX);
   r->position.y =
       TargetY(r->position.y, r->angle, r->vitesse / 100 * VITESSE_MAX);
-  if (r->position.x + SIZE_X / 2 - 1 > X) {
+  if (r->position.x + SIZE_X / 2 > X) {
     r->position.x = X - 5;
     degats(r, COLLISION);
+    return;
   }
   if (r->position.y + SIZE_Y / 2 > Y) {
     r->position.y = Y - 5;
     degats(r, COLLISION);
+    return;
   }
   if (r->position.x - SIZE_X / 2 < 0) {
     r->position.x = 5;
     degats(r, COLLISION);
+    return;
   }
   if (r->position.y - SIZE_Y / 2 < 0) {
     r->position.y = 5;

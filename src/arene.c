@@ -15,10 +15,10 @@ arene *initArene(char *fichiers[ROBOT_MAX]) {
   arene *a = calloc(1, sizeof(arene));
 
   a->nb_missile = 0;
-  a->l_robot[0] = initRobot(1.0, 1.0, fichiers[0], 0);
-  a->l_robot[1] = initRobot(10000.0, 1.0, fichiers[1], 1);
-  a->l_robot[2] = initRobot(1.0, 10000.0, fichiers[2], 2);
-  a->l_robot[3] = initRobot(10000.0, 10000.0, fichiers[3], 3);
+  a->l_robot[0] = initRobot(5.0, 5.0, fichiers[0], 0);
+  a->l_robot[1] = initRobot(9995.0, 5.0, fichiers[1], 1);
+  a->l_robot[2] = initRobot(5.0, 9995.0, fichiers[2], 2);
+  a->l_robot[3] = initRobot(9995.0, 9995.0, fichiers[3], 3);
 
   return a;
 }
@@ -41,7 +41,7 @@ void cycle_physique(arene *a) {
   }
   for (int i = 0; i < ROBOT_MAX; i++) {
     miseAJourRobot(a->l_robot[i]);
-    for (int j = i; j < ROBOT_MAX; j++) {
+    for (int j = i + 1; j < ROBOT_MAX - 1; j++) {
       collisionRtoR(a->l_robot[i], a->l_robot[j]);
     }
   }
