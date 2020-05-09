@@ -52,6 +52,8 @@ void collisionRtoR(robot *r1, robot *r2) {
       abs(r1->position.y - r2->position.y) < SIZE_Y) {
     degats(r1, COLLISION);
     degats(r2, COLLISION);
+    r1->vitesse = 0;
+    r2->vitesse = 0;
   }
 }
 
