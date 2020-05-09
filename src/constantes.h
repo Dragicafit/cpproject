@@ -1,6 +1,10 @@
 #ifndef DEF_CONSTANTES
 #define DEF_CONSTANTES
 
+#ifndef CLOCK_MONOTONIC_RAW
+#define CLOCK_MONOTONIC_RAW 4
+#endif
+
 #define X 10000
 #define Y 10000
 #define ROBOT_MAX 4
