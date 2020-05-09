@@ -87,12 +87,14 @@ expression* isExpression(FILE* f, char* name) {
     expression1->expression1[0] = isExpression(f, &name[1]);
     if (expression1->expression1 == NULL) return NULL;
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     expression1->operator= isOperator(buff);
     if (expression1->operator== - 1) {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
     }
     rewind -= fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     if (buff[strlen(buff) - 1] != ')') {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
@@ -124,6 +126,7 @@ expression* isExpression(FILE* f, char* name) {
     if (strcmp(name, "GPSY") == 0) expression1->type = GPSY;
 
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     expression1->expression1[0] = isExpression(f, buff);
     if (expression1->expression1[0] == NULL) {
       fseek(f, rewind, SEEK_CUR);
@@ -139,6 +142,7 @@ expression* isExpression(FILE* f, char* name) {
     int rewind = 0;
     for (int i = 0; i < 3; i++) {
       rewind -= fscanf(f, "%s ", buff);
+      if (rewind > 0) return NULL;
       expression1->expression1[i] = isExpression(f, buff);
       if (expression1->expression1[i] == NULL) {
         fseek(f, rewind, SEEK_CUR);
@@ -155,6 +159,7 @@ expression* isExpression(FILE* f, char* name) {
     int rewind = 0;
     for (int i = 0; i < 4; i++) {
       rewind -= fscanf(f, "%s ", buff);
+      if (rewind > 0) return NULL;
       expression1->expression1[i] = isExpression(f, buff);
       if (expression1->expression1[i] == NULL) {
         fseek(f, rewind, SEEK_CUR);
@@ -179,6 +184,7 @@ condition* isCondition(FILE* f, char* name) {
   if (condition1->expression1 == NULL) return NULL;
 
   int rewind = -fscanf(f, "%s ", buff);
+  if (rewind > 0) return NULL;
   condition1->comparison = isComparison(buff);
   if (condition1->comparison == -1) {
     fseek(f, rewind, SEEK_CUR);
@@ -186,6 +192,7 @@ condition* isCondition(FILE* f, char* name) {
   }
 
   rewind -= fscanf(f, "%s ", buff);
+  if (rewind > 0) return NULL;
   condition1->expression2 = isExpression(f, buff);
   if (condition1->expression2 == NULL) {
     fseek(f, rewind, SEEK_CUR);
@@ -206,6 +213,7 @@ line* isLine(FILE* f, char* name) {
   line1->number = strtoul(name, NULL, 10);
 
   int rewind = -fscanf(f, "%s ", buff);
+  if (rewind > 0) return NULL;
   line1->command = isCommand(f, buff);
   if (line1->command == NULL) {
     fseek(f, rewind, SEEK_CUR);
@@ -255,6 +263,7 @@ command* isCommand(FILE* f, char* name) {
     command1->type = WAIT;
 
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     command1->expression1 = isExpression(f, buff);
     if (command1->expression1 == NULL) {
       fseek(f, rewind, SEEK_CUR);
@@ -270,12 +279,14 @@ command* isCommand(FILE* f, char* name) {
     if (strcmp(name, "SHOOT") == 0) command1->type = SHOOT;
 
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     command1->expression1 = isExpression(f, buff);
     if (command1->expression1 == NULL) {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
     }
     rewind -= fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     command1->expression2 = isExpression(f, buff);
     if (command1->expression2 == NULL) {
       fseek(f, rewind, SEEK_CUR);
@@ -288,6 +299,7 @@ command* isCommand(FILE* f, char* name) {
     command1->type = GOTO;
 
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     if (!isNumber(buff)) {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
@@ -300,6 +312,7 @@ command* isCommand(FILE* f, char* name) {
     command1->type = IF;
 
     int rewind = -fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     command1->condition = isCondition(f, buff);
     if (command1->condition == NULL) {
       fseek(f, rewind, SEEK_CUR);
@@ -307,12 +320,14 @@ command* isCommand(FILE* f, char* name) {
     }
 
     rewind -= fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     if (strcmp(buff, "THEN") != 0) {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
     }
 
     rewind -= fscanf(f, "%s ", buff);
+    if (rewind > 0) return NULL;
     if (!isNumber(buff)) {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
@@ -329,8 +344,9 @@ program* parser(char nom[]) {
   if (fichier == NULL) handle_error("fopen");
 
   char buff[1285] = "";
-  fscanf(fichier, "%s ", buff);
+  if (fscanf(fichier, "%s ", buff) < 0) handle_error("fichier vide");
   program* p = isProgram(fichier, buff);
   fclose(fichier);
+  if (p == NULL) handle_error("fichier non conforme");
   return p;
 }
