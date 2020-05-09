@@ -41,7 +41,7 @@ void cycle_physique(arene *a) {
   }
   for (int i = 0; i < ROBOT_MAX; i++) {
     miseAJourRobot(a->l_robot[i]);
-    for (int j = i + 1; j < ROBOT_MAX - 1; j++) {
+    for (int j = i + 1; j < ROBOT_MAX; j++) {
       collisionRtoR(a->l_robot[i], a->l_robot[j]);
     }
   }
