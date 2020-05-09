@@ -58,18 +58,25 @@ void collisionRtoR(robot *r1, robot *r2) {
 void collisionRtoE(robot *r, missile *m) {
   uint32_t dist =
       distance(r->position.x, r->position.y, m->position.x, m->position.y);
-  if (dist <= DIST_50)
+  if (dist <= DIST_50) {
     degats(r, DEGAT_50);
-  else if (dist <= DIST_200)
+    return;
+  }
+  if (dist <= DIST_200) {
     degats(r, DEGAT_200);
-  else if (dist <= DIST_400)
+    return;
+  }
+  if (dist <= DIST_400) {
     degats(r, DEGAT_400);
+    return;
+  }
 }
 
 void collisionRtoM(arene *a, robot *r, missile *m) {
-  if (abs(r->position.x - m->position.x) < SIZE_X &&
-      abs(r->position.y - m->position.y) < SIZE_Y)
-    exploseRobots(a, m);
+  if (abs(r->position.x - m->position.x) >= SIZE_X ||
+      abs(r->position.y - m->position.y) >= SIZE_Y)
+    return;
+  exploseRobots(a, m);
 }
 
 void exploseRobots(arene *a, missile *m) {

@@ -36,24 +36,24 @@ void miseAJourMissile(arene *a, int i) {
   m->position.y = TargetY(m->position.y, m->angle, distance);
   if (m->position.x >= X) {
     m->position.x = X;
-    m->position.y = (Y - y) * (m->position.x - x) / (m->position.y - y);
+    m->position.y = (X - x) * (m->position.y - y) / (m->position.x - x);
     exploseRobots(a, m);
     return;
   }
   if (m->position.y >= Y) {
-    m->position.x = (X - x) * (m->position.y - y) / (m->position.x - x);
+    m->position.x = (Y - y) * (m->position.x - x) / (m->position.y - y);
     m->position.y = Y;
     exploseRobots(a, m);
     return;
   }
   if (m->position.x <= 0) {
     m->position.x = 0;
-    m->position.y = y * (m->position.x - x) / (m->position.y - y);
+    m->position.y = x * (m->position.y - y) / (m->position.x - x);
     exploseRobots(a, m);
     return;
   }
   if (m->position.y <= 0) {
-    m->position.x = x * (m->position.y - y) / (m->position.x - x);
+    m->position.x = y * (m->position.x - x) / (m->position.y - y);
     m->position.y = 0;
     exploseRobots(a, m);
     return;
