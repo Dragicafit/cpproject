@@ -29,6 +29,7 @@ void miseAJourMissile(arene *a, int i) {
   int distance = m->distanceExplosion - m->distance < MISSILE_SPEED
                      ? m->distanceExplosion
                      : MISSILE_SPEED;
+  distance *= UNITE_COEFF;
   m->distance += distance;
   float x = m->position.x;
   float y = m->position.y;

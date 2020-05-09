@@ -13,9 +13,6 @@
 #include "plateau.h"
 #include "robot.h"
 
-#define DELAY 33
-#define MSIZE_H (3 * (COLS / 4))
-
 char debug;
 
 int main(int argc, char *argv[]) {

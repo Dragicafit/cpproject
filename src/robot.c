@@ -39,10 +39,10 @@ void degats(robot *r, float d) {
 
 void miseAJourRobot(robot *r) {
   if (r->mort) return;
-  r->position.x =
-      TargetX(r->position.x, r->angle, r->vitesse / 100 * VITESSE_MAX);
-  r->position.y =
-      TargetY(r->position.y, r->angle, r->vitesse / 100 * VITESSE_MAX);
+  r->position.x = TargetX(r->position.x, r->angle,
+                          r->vitesse / 100 * VITESSE_MAX * UNITE_COEFF);
+  r->position.y = TargetY(r->position.y, r->angle,
+                          r->vitesse / 100 * VITESSE_MAX * UNITE_COEFF);
   if (r->position.x + SIZE_X / 2 > X) {
     r->position.x = X - 5;
     degats(r, COLLISION);

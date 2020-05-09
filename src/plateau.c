@@ -34,18 +34,41 @@ void plateau(arene *plateau) {
     startColor();
   }
 
+  struct timespec delay;
+  delay.tv_sec = 0;
+  delay.tv_nsec = SLEEP_GAME_NS;
+
+  struct timespec dernier_cycle, actuel_cycle;
+  struct timespec dernier_affichage, actuel_affichage;
+  clock_gettime(CLOCK_MONOTONIC_RAW, &dernier_cycle);
+  clock_gettime(CLOCK_MONOTONIC_RAW, &dernier_affichage);
+
   while (!isWinner(plateau)) {
-    cycle_script(plateau);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &actuel_cycle);
+    if (dernier_cycle.tv_sec * SECOND_TO_NS + dernier_cycle.tv_nsec +
+            DELAY_CYCLE_NS <
+        actuel_cycle.tv_sec * SECOND_TO_NS + actuel_cycle.tv_nsec) {
+      cycle_script(plateau);
+      clock_gettime(CLOCK_MONOTONIC_RAW, &dernier_cycle);
+    }
     cycle_physique(plateau);
-    if (!debug) cycle_plateau(vue, stats, plateau);
-    usleep(SLEEP_GAME);
-    if (!debug) {
+    clock_gettime(CLOCK_MONOTONIC_RAW, &actuel_affichage);
+    if (!debug &&
+        dernier_affichage.tv_sec * SECOND_TO_NS + dernier_affichage.tv_nsec +
+                DELAY_AFFICHAGE_NS <
+            actuel_affichage.tv_sec * SECOND_TO_NS + actuel_affichage.tv_nsec) {
       wclear(vue);
       wclear(stats);
+      cycle_plateau(vue, stats, plateau);
+      clock_gettime(CLOCK_MONOTONIC_RAW, &dernier_affichage);
     }
+    nanosleep(&delay, NULL);
   }
 
   if (!debug) {
+    wclear(vue);
+    wclear(stats);
+    cycle_plateau(vue, stats, plateau);
     mvwprintw(vue, 10, 10, "Felicitation ! Il y'a un gagnant !");
     getch();
     end_vue(vue, stats);

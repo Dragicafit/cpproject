@@ -1,9 +1,6 @@
 #ifndef DEF_PLATEAU
 #define DEF_PLATEAU
 
-#define DELAY 33
-#define MSIZE_H (3 * (COLS / 4))
-
 #include <ncurses.h>
 
 #include "arene.h"
