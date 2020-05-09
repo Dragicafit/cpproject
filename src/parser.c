@@ -232,13 +232,13 @@ program* isProgram(FILE* f, char* name) {
 
   line* lines[MAX_LINES];
   lines[0] = isLine(f, name);
-  if (lines[0] == NULL) return NULL;
+  if (lines[0] == NULL || lines[0]->number != 0) return NULL;
 
-  for (i = 1;; i++) {
+  for (i = 1; i < MAX_LINES; i++) {
     int rewind = -fscanf(f, "%s ", buff);
     if (rewind > 0) break;
     lines[i] = isLine(f, buff);
-    if (lines[i] == NULL) {
+    if (lines[i] == NULL || lines[i]->number != i) {
       printDebug("NULL\n");
       fseek(f, rewind, SEEK_CUR);
       break;
