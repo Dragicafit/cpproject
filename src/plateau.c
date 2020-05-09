@@ -12,6 +12,15 @@
 #include "plateau.h"
 #include "robot.h"
 
+char isWinner(arene *p) {
+  int count = ROBOT_MAX;
+  for (int i = 0; i < ROBOT_MAX; i++) {
+    if (!p->l_robot[i]->mort) continue;
+    count--;
+  }
+  return count <= 1;
+}
+
 void plateau(arene *plateau) {
   WINDOW *vue = initVue();
   WINDOW *stats = initStats();
@@ -24,6 +33,13 @@ void plateau(arene *plateau) {
     cycle_physique(plateau);
     cycle_plateau(vue, stats, plateau);
     usleep(100000);
+    if (isWinner(plateau)) {
+      mvwprintw(vue, 10, 10, "Felicitation ! Il y'a un gagnant !");
+      getch();
+      break;
+    }
+    wclear(vue);
+    wclear(stats);
   }
   end_vue(vue, stats);
 }
@@ -54,8 +70,6 @@ void cycle_plateau(WINDOW *vue, WINDOW *stats, arene *plateau) {
   add_stats(plateau, stats);
   placer_robot(plateau, vue);
   position_missile(plateau, vue);
-  wclear(vue);
-  wclear(stats);
 }
 
 void startColor() {
@@ -96,8 +110,14 @@ void add_stats(arene *plateau, WINDOW *stats) {
     mvwprintw(stats, pos, 1, "Missiles en cours: %i",
               plateau->l_robot[i]->nb_missiles);
     pos++;
-    mvwprintw(stats, pos, 1, "Vie : %f",
-              PV_MAX * (1 - plateau->l_robot[i]->degat));
+    if (plateau->l_robot[i]->degat <= 1) {
+      mvwprintw(stats, pos, 1, "Vie : %i",
+                PV_MAX * (1 - plateau->l_robot[i]->degat));
+    } else {
+      mvwprintw(stats, pos, 1, "Vie : Vous êtes mort, (%i)",
+                PV_MAX * (1 - plateau->l_robot[i]->degat));
+    }
+    mvwprintw(stats, pos + 1, 1, "Etat: %i", plateau->l_robot[i]->mort);
     pos += 2;
   }
   wrefresh(stats);
@@ -109,9 +129,15 @@ void placer_robot(arene *plateau, WINDOW *vue) {
   int couleur = 1;
 
   for (int i = 0; i < ROBOT_MAX; i++) {
-    wattron(vue, COLOR_PAIR(couleur));
-    robot_mur(plateau->l_robot[i], robot_visu[i], echx, echy, vue);
-    wattroff(vue, COLOR_PAIR(couleur));
+    if (plateau->l_robot[i]->degat <= 1) {
+      wattron(vue, COLOR_PAIR(couleur));
+      robot_mur(plateau->l_robot[i], robot_visu[i], echx, echy, vue);
+      wattroff(vue, COLOR_PAIR(couleur));
+    } else {
+      wattron(vue, COLOR_PAIR(couleur));
+      robot_mur(plateau->l_robot[i], 'x', echx, echy, vue);
+      wattroff(vue, COLOR_PAIR(couleur));
+    }
     couleur++;
   }
 }
