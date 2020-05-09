@@ -26,13 +26,14 @@ void explose(missile *m) { m->aExplose = 1; }
 
 void miseAJourMissile(arene *a, int i) {
   missile *m = a->l_missile[i];
-  m->distance = m->distanceExplosion - m->distance < MISSILE_SPEED
-                    ? m->distanceExplosion
-                    : MISSILE_SPEED;
+  int distance = m->distanceExplosion - m->distance < MISSILE_SPEED
+                     ? m->distanceExplosion
+                     : MISSILE_SPEED;
+  m->distance += distance;
   float x = m->position.x;
   float y = m->position.y;
-  m->position.x = TargetX(m->position.x, m->angle, m->distance);
-  m->position.y = TargetY(m->position.y, m->angle, m->distance);
+  m->position.x = TargetX(m->position.x, m->angle, distance);
+  m->position.y = TargetY(m->position.y, m->angle, distance);
   if (m->position.x >= X) {
     m->position.x = X;
     m->position.y = (Y - y) * (m->position.x - x) / (m->position.y - y);
