@@ -28,19 +28,17 @@ void plateau(arene *plateau) {
   // Start color
   startColor();
 
-  while (1) {
+  while (!isWinner(plateau)) {
     cycle_script(plateau);
     cycle_physique(plateau);
     cycle_plateau(vue, stats, plateau);
     usleep(100000);
-    if (isWinner(plateau)) {
-      mvwprintw(vue, 10, 10, "Felicitation ! Il y'a un gagnant !");
-      getch();
-      break;
-    }
     wclear(vue);
     wclear(stats);
   }
+
+  mvwprintw(vue, 10, 10, "Felicitation ! Il y'a un gagnant !");
+  getch();
   end_vue(vue, stats);
 }
 
@@ -92,7 +90,6 @@ void end_vue(WINDOW *vue, WINDOW *stats) {
   getch();
   endwin();
   free(vue);
-  free(stats);
 }
 
 void add_stats(arene *plateau, WINDOW *stats) {
