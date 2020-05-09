@@ -38,7 +38,7 @@ void plateau(arene *plateau) {
     cycle_script(plateau);
     cycle_physique(plateau);
     if (!debug) cycle_plateau(vue, stats, plateau);
-    usleep(100000);
+    usleep(SLEEP_GAME);
     if (!debug) {
       wclear(vue);
       wclear(stats);

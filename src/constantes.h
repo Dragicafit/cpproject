@@ -24,6 +24,7 @@
 #define MAX_LINES 512
 #define M_PI 3.14
 #define MISSILE_SPEED 500
+#define SLEEP_GAME 10
 
 #define DELAY 33
 
