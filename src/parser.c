@@ -292,7 +292,7 @@ command* isCommand(FILE* f, char* name) {
       fseek(f, rewind, SEEK_CUR);
       return NULL;
     }
-    command1->number = strtoul(name, NULL, 10);
+    command1->number = strtoul(buff, NULL, 10);
 
     return command1;
   }
