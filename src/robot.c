@@ -38,6 +38,7 @@ void degats(robot *r, float d) {
 }
 
 void miseAJourRobot(robot *r) {
+  if (r->mort) return;
   r->position.x =
       TargetX(r->position.x, r->angle, r->vitesse / 100 * VITESSE_MAX);
   r->position.y =
