@@ -121,8 +121,7 @@ void add_stats(arene *plateau, WINDOW *stats) {
       mvwprintw(stats, pos, 1, "Vie : %f",
                 PV_MAX * (1 - plateau->l_robot[i]->degat));
     } else {
-      mvwprintw(stats, pos, 1, "Vie : Vous êtes mort, (%f)",
-                PV_MAX * (1 - plateau->l_robot[i]->degat));
+      mvwprintw(stats, pos, 1, "Vie : MORT");
     }
     pos += 2;
   }
