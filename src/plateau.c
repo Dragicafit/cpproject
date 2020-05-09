@@ -117,7 +117,6 @@ void add_stats(arene *plateau, WINDOW *stats) {
       mvwprintw(stats, pos, 1, "Vie : Vous êtes mort, (%f)",
                 PV_MAX * (1 - plateau->l_robot[i]->degat));
     }
-    mvwprintw(stats, pos + 1, 1, "Etat: %i", plateau->l_robot[i]->mort);
     pos += 2;
   }
   wrefresh(stats);
@@ -143,8 +142,8 @@ void placer_robot(arene *plateau, WINDOW *vue) {
 }
 
 void position_missile(arene *plateau, WINDOW *vue) {
-  float echy = (((float)LINES) / 10000.0);
-  float echx = ((float)MSIZE_H / 10000.0);
+  float echy = (LINES / 10000.0);
+  float echx = (MSIZE_H / 10000.0);
   for (int i = 0; i < plateau->nb_missile; i++) {
     missile *m = plateau->l_missile[i];
     float x = m->position.x * echx;
@@ -152,12 +151,32 @@ void position_missile(arene *plateau, WINDOW *vue) {
     for (int j = 0; j < ROBOT_MAX; j++) {
       if (m->parent == plateau->l_robot[j]) {
         wattron(vue, COLOR_PAIR(j + 1));
-        mvwaddch(vue, y, x, 'o');
+        // mvwaddch(vue, y, x, 'o');
+        missile_mur(m, echx, echy, vue);
         wattroff(vue, COLOR_PAIR(j + 1));
       }
     }
     wrefresh(vue);
   }
+}
+
+void missile_mur(missile *m, float echx, float echy, WINDOW *vue) {
+  float x = m->position.x * echx;
+  float y = m->position.y * echy;
+  if (x < 1) {
+    x = 1;
+  }
+  if (y < 1) {
+    y = 1;
+  }
+  if (x > (MSIZE_H - 2.0)) {
+    x = MSIZE_H - 2.0;
+  }
+  if (y > (LINES - 2.0)) {
+    y = LINES - 2.0;
+  }
+  mvwaddch(vue, y, x, 'o');
+  wrefresh(vue);
 }
 
 void robot_mur(robot *r, char c, float echx, float echy, WINDOW *vue) {

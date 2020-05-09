@@ -23,5 +23,6 @@ void add_stats(arene *plateau, WINDOW *stats);
 void placer_robot(arene *plateau, WINDOW *vue);
 void position_missile(arene *plateau, WINDOW *vue);
 void robot_mur(robot *r, char c, float echy, float echx, WINDOW *vue);
+void missile_mur(missile *m, float echx, float echy, WINDOW *vue);
 
 #endif
