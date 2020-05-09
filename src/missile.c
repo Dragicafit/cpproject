@@ -26,9 +26,8 @@ void explose(missile *m) { m->aExplose = 1; }
 
 void miseAJourMissile(arene *a, int i) {
   missile *m = a->l_missile[i];
-  m->distance = m->distanceExplosion - m->distance < 100
-                    ? m->distanceExplosion - m->distance
-                    : 100;
+  m->distance =
+      m->distanceExplosion - m->distance < 500 ? m->distanceExplosion : 500;
   m->position.x = TargetX(m->position.x, m->angle, m->distance);
   m->position.y = TargetY(m->position.y, m->angle, m->distance);
   if (m->position.x > X) {
@@ -51,5 +50,7 @@ void miseAJourMissile(arene *a, int i) {
     exploseRobots(a, m);
     return;
   }
-  if (m->distance >= m->distanceExplosion) explose(m);
+  if (m->distance >= m->distanceExplosion) {
+    exploseRobots(a, m);
+  }
 }
