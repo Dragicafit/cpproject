@@ -27,4 +27,6 @@
 
 #define DELAY 33
 
+extern char debug;
+
 #endif

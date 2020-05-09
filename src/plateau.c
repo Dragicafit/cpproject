@@ -6,6 +6,7 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "affichage.h"
 #include "constantes.h"
 #include "expression.h"
 #include "main.h"
@@ -22,24 +23,33 @@ char isWinner(arene *p) {
 }
 
 void plateau(arene *plateau) {
-  WINDOW *vue = initVue();
-  WINDOW *stats = initStats();
+  WINDOW *vue;
+  WINDOW *stats;
 
-  // Start color
-  startColor();
+  if (!debug) {
+    vue = initVue();
+    stats = initStats();
+
+    // Start color
+    startColor();
+  }
 
   while (!isWinner(plateau)) {
     cycle_script(plateau);
     cycle_physique(plateau);
-    cycle_plateau(vue, stats, plateau);
+    if (!debug) cycle_plateau(vue, stats, plateau);
     usleep(100000);
-    wclear(vue);
-    wclear(stats);
+    if (!debug) {
+      wclear(vue);
+      wclear(stats);
+    }
   }
 
-  mvwprintw(vue, 10, 10, "Felicitation ! Il y'a un gagnant !");
-  getch();
-  end_vue(vue, stats);
+  if (!debug) {
+    mvwprintw(vue, 10, 10, "Felicitation ! Il y'a un gagnant !");
+    getch();
+    end_vue(vue, stats);
+  }
 }
 
 WINDOW *initVue() {
@@ -73,7 +83,7 @@ void cycle_plateau(WINDOW *vue, WINDOW *stats, arene *plateau) {
 void startColor() {
   if (has_colors() == FALSE) {
     endwin();
-    printf("Your terminal does not support color\n");
+    printDebug("Your terminal does not support color\n");
     exit(1);
   }
   start_color();

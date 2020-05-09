@@ -12,37 +12,37 @@
 char isDigit(char name) { return (char)!!isdigit(name); }
 
 char isInteger(char* name) {
-  printf("isInteger : %s ", name);
+  printDebug("isInteger : %s ", name);
 
   int i = 0;
   if (name[0] == '-') i++;
   for (; i < strlen(name); i++) {
     if (!isDigit(name[i])) {
-      printf("0\n");
+      printDebug("0\n");
       return 0;
     }
   }
 
-  printf("1\n");
+  printDebug("1\n");
   return 1;
 }
 
 char isNumber(char* name) {
-  printf("isNumber : %s ", name);
+  printDebug("isNumber : %s ", name);
 
   for (int i = 0; i < strlen(name); i++) {
     if (!isDigit(name[i])) {
-      printf("0\n");
+      printDebug("0\n");
       return 0;
     }
   }
 
-  printf("1\n");
+  printDebug("1\n");
   return 1;
 }
 
 operator isOperator(char* name) {
-  printf("isOperator : %s ", name);
+  printDebug("isOperator : %s ", name);
 
   if (strlen(name) != 1) return -1;
 
@@ -52,12 +52,12 @@ operator isOperator(char* name) {
   if (name[0] == '/') return DIV;
   if (name[0] == '%') return MOD;
 
-  printf("0\n");
+  printDebug("0\n");
   return -1;
 }
 
 comparison isComparison(char* name) {
-  printf("isComparison : %s ", name);
+  printDebug("isComparison : %s ", name);
 
   if (strcmp(name, "<") == 0) return STRIC_INF;
   if (strcmp(name, "<=") == 0) return INF;
@@ -66,12 +66,12 @@ comparison isComparison(char* name) {
   if (strcmp(name, ">=") == 0) return SUP;
   if (strcmp(name, ">") == 0) return STRICT_SUP;
 
-  printf("0\n");
+  printDebug("0\n");
   return -1;
 }
 
 expression* isExpression(FILE* f, char* name) {
-  printf("isExpression : %s ", name);
+  printDebug("isExpression : %s ", name);
 
   expression* expression1 = calloc(1, sizeof(expression));
   char buff[1285];
@@ -165,12 +165,12 @@ expression* isExpression(FILE* f, char* name) {
     return expression1;
   }
 
-  printf("0\n");
+  printDebug("0\n");
   return NULL;
 }
 
 condition* isCondition(FILE* f, char* name) {
-  printf("isCondition : %s ", name);
+  printDebug("isCondition : %s ", name);
 
   condition* condition1 = calloc(1, sizeof(condition));
   char buff[1285];
@@ -192,12 +192,12 @@ condition* isCondition(FILE* f, char* name) {
     return NULL;
   }
 
-  printf("1\n");
+  printDebug("1\n");
   return condition1;
 }
 
 line* isLine(FILE* f, char* name) {
-  printf("isLine : %s ", name);
+  printDebug("isLine : %s ", name);
 
   line* line1 = calloc(1, sizeof(line));
   char buff[1285];
@@ -212,12 +212,12 @@ line* isLine(FILE* f, char* name) {
     return NULL;
   }
 
-  printf("1\n");
+  printDebug("1\n");
   return line1;
 }
 
 program* isProgram(FILE* f, char* name) {
-  printf("isProgram : %s ", name);
+  printDebug("isProgram : %s ", name);
 
   char buff[1285];
   int i = 0;
@@ -231,7 +231,7 @@ program* isProgram(FILE* f, char* name) {
     if (rewind > 0) break;
     lines[i] = isLine(f, buff);
     if (lines[i] == NULL) {
-      printf("NULL\n");
+      printDebug("NULL\n");
       fseek(f, rewind, SEEK_CUR);
       break;
     }
@@ -241,13 +241,13 @@ program* isProgram(FILE* f, char* name) {
 
   memcpy(program1->lines, lines, i * sizeof(line*));
 
-  printf("1\n");
+  printDebug("1\n");
   printProgram(program1);
   return program1;
 }
 
 command* isCommand(FILE* f, char* name) {
-  printf("isCommand : %s ", name);
+  printDebug("isCommand : %s ", name);
 
   command* command1 = calloc(1, sizeof(command));
   char buff[1285];

@@ -1,6 +1,7 @@
 #include "affichage.h"
 
 #include <ctype.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,7 +12,7 @@
 
 void printProgram(program* prog) {
   if (prog == NULL) {
-    printf("Ceci n'est pas valide");
+    printDebug("Ceci n'est pas valide");
     return;
   }
   for (int i = 0; i < prog->length / sizeof(line*); i++) {
@@ -20,7 +21,7 @@ void printProgram(program* prog) {
 }
 
 void printCommand(command* com) {
-  printf("%s ", commandToString[com->type]);
+  printDebug("%s ", commandToString[com->type]);
   switch (com->type) {
     case WAIT:
       printExpression(com->expression1);
@@ -30,7 +31,7 @@ void printCommand(command* com) {
       break;
     case IF:
       printCondition(com->condition);
-      printf("THEN ");
+      printDebug("THEN ");
       printNumber(com->number);
       break;
     case POKE:
@@ -45,7 +46,7 @@ void printCommand(command* com) {
 }
 
 void printExpression(expression* exp) {
-  printf("%s ", expressionToString[exp->type]);
+  printDebug("%s ", expressionToString[exp->type]);
   switch (exp->type) {
     case INT:
       printInteger(exp->integer);
@@ -79,9 +80,9 @@ void printExpression(expression* exp) {
   }
 }
 
-void printNumber(uint32_t number) { printf("%u ", number); }
+void printNumber(uint32_t number) { printDebug("%u ", number); }
 
-void printInteger(int32_t integer) { printf("%i ", integer); }
+void printInteger(int32_t integer) { printDebug("%i ", integer); }
 
 void printCondition(condition* cond) {
   printExpression(cond->expression1);
@@ -89,14 +90,23 @@ void printCondition(condition* cond) {
   printExpression(cond->expression2);
 }
 
-void printOperator(operator op) { printf("%s ", operatorToString[op]); }
+void printOperator(operator op) { printDebug("%s ", operatorToString[op]); }
 
 void printComparison(comparison comp) {
-  printf("%s ", comparisonToString[comp]);
+  printDebug("%s ", comparisonToString[comp]);
 }
 
 void printLine(line* l) {
   printNumber(l->number);
   printCommand(l->command);
-  printf("\n");
+  printDebug("\n");
+}
+
+int printDebug(const char* format, ...) {
+  if (!debug) return 0;
+  va_list vl;
+  va_start(vl, format);
+  int ret = vprintf(format, vl);
+  va_end(vl);
+  return ret;
 }

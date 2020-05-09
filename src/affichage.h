@@ -23,5 +23,6 @@ void printCondition(condition* cond);
 void printOperator(operator op);
 void printComparison(comparison comp);
 void printLine(line* l);
+int printDebug(const char* format, ...);
 
 #endif

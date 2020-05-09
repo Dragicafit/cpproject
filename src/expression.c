@@ -199,9 +199,9 @@ void cycle_script(arene *a) {
     }
     command *c = r->script->lines[r->ligne++]->command;
     printCommand(c);
-    printf("\n");
+    printDebug("\n");
     fflush(0);
     Command(a, r, c);
   }
-  printf("\n");
+  printDebug("\n");
 }
