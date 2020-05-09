@@ -194,6 +194,9 @@ void cycle_script(arene *a) {
       r->mort = 1;
       continue;
     }
+    if (r->mort) {
+      continue;
+    }
     command *c = r->script->lines[r->ligne++]->command;
     printCommand(c);
     printf("\n");
