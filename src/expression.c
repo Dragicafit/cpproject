@@ -197,7 +197,12 @@ void cycle_script(arene *a) {
     if (r->mort) {
       continue;
     }
+    if (r->wait > 0) {
+      r->wait--;
+      continue;
+    }
     command *c = r->script->lines[r->ligne++]->command;
+    printDebug("robot : %i\n", i);
     printCommand(c);
     printDebug("\n");
     fflush(0);
