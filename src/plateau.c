@@ -44,6 +44,18 @@ void plateau(arene *plateau) {
   clock_gettime(CLOCK_MONOTONIC_RAW, &dernier_affichage);
 
   while (!isWinner(plateau)) {
+    timeout(1);
+    int ch = getch();
+    if (ch == 'a') {
+      end_vue(vue, stats);
+      break;
+    } else if (ch == 'p') {
+      delay.tv_nsec -= 1000000;
+    } else if (ch == 'm' && delay.tv_nsec > 1000000) {
+      delay.tv_nsec += 1000000;
+    }
+    noecho();
+
     clock_gettime(CLOCK_MONOTONIC_RAW, &actuel_cycle);
     if (dernier_cycle.tv_sec * SECOND_TO_NS + dernier_cycle.tv_nsec +
             DELAY_CYCLE_NS <
