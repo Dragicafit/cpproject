@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  if (scripts != NULL && g_strv_length(scripts) == ROBOT_MAX)
+  if (scripts == NULL || g_strv_length(scripts) != ROBOT_MAX)
     handle_error("nombre de scripts insufisant");
 
   arene *plat = initArene(scripts);
