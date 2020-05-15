@@ -18,29 +18,29 @@ Le projet permet de faire la suite d'instruction suivante :
 Pour afficher l'aide :
 
 ```bash
-./main -h
+./CPproject -h
 ```
 
 Pour lancer en mode debug :
 
 ```bash
-./main -d
+./CPproject -d
 ```
 
 Pour changer le nombre d'affichage par seconde :
 
 ```bash
-./main -a [value]
+./CPproject -a [value]
 ```
 
 Pour changer le nombre de cycle par seconde :
 
 ```bash
-./main -c [value]
+./CPproject -c [value]
 ```
 
 Pour les scripts des robots :
 
 ```bash
-./main -s [scrypt 1] -s [scrypt 2] -s [scrypt 3] -s [scrypt 4]
+./CPproject -s [scrypt 1] -s [scrypt 2] -s [scrypt 3] -s [scrypt 4]
 ```
