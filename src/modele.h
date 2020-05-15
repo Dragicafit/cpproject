@@ -24,16 +24,6 @@ typedef struct {
 } robot;
 
 typedef struct {
-  float vitesse;
-  float direction;
-} engine;
-
-typedef struct {
-  float direction;
-  int distance;
-} shoot;
-
-typedef struct {
   robot *parent;
   pos position;
   int distance;
