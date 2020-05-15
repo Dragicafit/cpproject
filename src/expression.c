@@ -205,7 +205,6 @@ void cycle_script(arene *a) {
     printDebug("robot : %i\n", i);
     printCommand(c);
     printDebug("\n");
-    fflush(0);
     Command(a, r, c);
   }
   printDebug("\n");
