@@ -28,6 +28,7 @@
 #define MAX_LINES 512
 #define M_PI 3.14
 #define MISSILE_SPEED 500
+#define TAILLE_MOT 30
 
 #define SECOND_TO_NS (long)1000000000
 

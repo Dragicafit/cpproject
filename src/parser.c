@@ -74,7 +74,7 @@ expression* isExpression(FILE* f, char* name) {
   printDebug("isExpression : %s ", name);
 
   expression* expression1 = calloc(1, sizeof(expression));
-  char buff[1285];
+  char buff[TAILLE_MOT];
 
   if (isInteger(name)) {
     expression1->type = INT;
@@ -178,7 +178,7 @@ condition* isCondition(FILE* f, char* name) {
   printDebug("isCondition : %s ", name);
 
   condition* condition1 = calloc(1, sizeof(condition));
-  char buff[1285];
+  char buff[TAILLE_MOT];
 
   condition1->expression1 = isExpression(f, name);
   if (condition1->expression1 == NULL) return NULL;
@@ -207,7 +207,7 @@ line* isLine(FILE* f, char* name) {
   printDebug("isLine : %s ", name);
 
   line* line1 = calloc(1, sizeof(line));
-  char buff[1285];
+  char buff[TAILLE_MOT];
 
   if (!isNumber(name)) return NULL;
   line1->number = strtoul(name, NULL, 10);
@@ -227,7 +227,7 @@ line* isLine(FILE* f, char* name) {
 program* isProgram(FILE* f, char* name) {
   printDebug("isProgram : %s ", name);
 
-  char buff[1285];
+  char buff[TAILLE_MOT];
   int i = 0;
 
   line* lines[MAX_LINES];
@@ -258,7 +258,7 @@ command* isCommand(FILE* f, char* name) {
   printDebug("isCommand : %s ", name);
 
   command* command1 = calloc(1, sizeof(command));
-  char buff[1285];
+  char buff[TAILLE_MOT];
   if (strcmp(name, "WAIT") == 0) {
     command1->type = WAIT;
 
@@ -343,7 +343,7 @@ program* parser(char nom[]) {
   FILE* fichier = fopen(nom, "r");
   if (fichier == NULL) handle_error("fopen");
 
-  char buff[1285] = "";
+  char buff[TAILLE_MOT] = "";
   if (fscanf(fichier, "%s ", buff) < 0) handle_error("fichier vide");
   program* p = isProgram(fichier, buff);
   fclose(fichier);
