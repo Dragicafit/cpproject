@@ -5,6 +5,12 @@
 #define CLOCK_MONOTONIC_RAW 4
 #endif
 
+#include <glib.h>
+
+extern gint APS;
+extern gint CPS;
+extern gboolean debug;
+
 #define X 10000
 #define Y 10000
 #define ROBOT_MAX 4
@@ -34,12 +40,10 @@
 #define SLEEP_GAME_NS (long)10000000
 #define AFFICHAGE_PAR_SECONDS 60
 #define CYCLE_PAR_SECONDS 10
-#define DELAY_AFFICHAGE_NS SECOND_TO_NS / AFFICHAGE_PAR_SECONDS
-#define DELAY_CYCLE_NS SECOND_TO_NS / CYCLE_PAR_SECONDS
-#define UNITE_COEFF (float)CYCLE_PAR_SECONDS* SLEEP_GAME_NS / SECOND_TO_NS
+#define DELAY_AFFICHAGE_NS SECOND_TO_NS / APS
+#define DELAY_CYCLE_NS SECOND_TO_NS / CPS
+#define UNITE_COEFF (float)CPS* SLEEP_GAME_NS / SECOND_TO_NS
 
 #define MSIZE_H (3 * (COLS / 4))
-
-extern char debug;
 
 #endif
