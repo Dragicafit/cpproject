@@ -22,8 +22,8 @@ static gchar **scripts;
 
 static GOptionEntry entries[] = {
     {"debug", 'd', 0, G_OPTION_ARG_NONE, &debug, "debug", NULL},
-    {"APS", 'a', 0, G_OPTION_ARG_INT, &APS, "affichage par seconde", NULL},
-    {"CPS", 'c', 0, G_OPTION_ARG_INT, &CPS, "cycle par seconde", NULL},
+    {"APS", 'a', 0, G_OPTION_ARG_INT, &APS, "affichage par seconde", "APS"},
+    {"CPS", 'c', 0, G_OPTION_ARG_INT, &CPS, "cycle par seconde", "CPS"},
     {"script", 's', 0, G_OPTION_ARG_FILENAME_ARRAY, &scripts,
      "scripts des robots", "BLOB"},
     {NULL}};
