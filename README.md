@@ -42,5 +42,5 @@ Pour changer le nombre de cycle par seconde :
 Pour les scripts des robots :
 
 ```bash
-./main -s [scrypt 1] [scrypt 2] [scrypt 3] [scrypt 4]
+./main -s [scrypt 1] -s [scrypt 2] -s [scrypt 3] -s [scrypt 4]
 ```
