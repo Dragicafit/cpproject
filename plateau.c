@@ -187,12 +187,9 @@ void position_missile(arene *plateau, WINDOW *vue) {
   float echx = (MSIZE_H / 10000.0);
   for (int i = 0; i < plateau->nb_missile; i++) {
     missile *m = plateau->l_missile[i];
-    float x = m->position.x * echx;
-    float y = m->position.y * echy;
     for (int j = 0; j < ROBOT_MAX; j++) {
       if (m->parent == plateau->l_robot[j]) {
         wattron(vue, COLOR_PAIR(j + 1));
-        // mvwaddch(vue, y, x, 'o');
         missile_mur(m, echx, echy, vue);
         wattroff(vue, COLOR_PAIR(j + 1));
       }
